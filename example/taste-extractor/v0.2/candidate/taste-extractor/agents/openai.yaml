@@ -1,0 +1,4 @@
+interface:
+  display_name: "Taste Extractor"
+  short_description: "Turn any medium's taste into a reusable production brief"
+  default_prompt: "Use $taste-extractor to extract an evidence-traced taste profile and handoff from this source."

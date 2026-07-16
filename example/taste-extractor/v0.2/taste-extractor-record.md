@@ -4,7 +4,7 @@ Repository root: `<repository-root>`
 Root resolution: `git`
 Repository slug: `dojo`
 Candidate skill path:
-`<repository-root>/example/taste-extractor/candidate/taste-extractor`
+`<repository-root>/example/taste-extractor/v0.2/candidate/taste-extractor`
 
 *Tier: technique · 2026-07-16 · gpt-5.6-sol · audited instruction-bounded*
 

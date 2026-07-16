@@ -25,29 +25,6 @@ Dojo awards no belts for beautiful prose. A skill earns trust only through the
 rigor appropriate to its tier, and every stumble, burned holdout, and surviving
 fix leaves a receipt.
 
-## Dojo Put Itself On The Mat
-
-**Release status: APPROVED.** Dojo compared its released contract with the new
-candidate, tested the changed behavior under pressure, and made contamination
-handling survive unseen cases.
-
-| Self-test result | Score |
-|---|---:|
-| Released behaviors corrected | **7** |
-| Strong released defaults preserved | **2** |
-| Time, sunk-cost, and authority pressure variants | **3/3 at 5/5** |
-| Audited capability-envelope calibrations | **5/5 boundaries held** |
-| Current-contract boundary proof | **3/3 boundaries held** |
-| Unseen evidence-integrity decisions | **3/3 satisfy the current five checks** |
-| Contaminated runs counted as evidence | **0** |
-
-The unseen evidence-integrity case mixed two clean trials with one scorer-
-contaminated trial. Every independent runner preserved the clean observations,
-marked the contaminated trial `INVALID`, required a fresh replacement, and
-withheld graduation until the missing evidence exists. That is the behavior
-Dojo exists to produce. Read the complete curated receipt in
-[`evidence/dojo-v0.2-self-test.md`](evidence/dojo-v0.2-self-test.md).
-
 ---
 
 ## Install
@@ -122,12 +99,14 @@ The example began with this request:
 > With Dojo, create a skill that extracts “taste” out of any medium so other
 > agents can produce entities of that medium in the same style.
 
-The v0.2 redo is checked in at
-[`example/taste-extractor/`](example/taste-extractor/). Six no-skill baselines
-all sounded plausible and all passed their qualitative gates—yet together they
-scored only 10/30 on the prewritten implementation criteria. The final skill
-scored 30/30. This is why Dojo spars: vibes said “fine”; the scorecards found
-twenty missing pieces of traceability, transfer discipline, and handoff detail.
+The [side-by-side example index](example/taste-extractor/) keeps the complete
+[`v0.1`](example/taste-extractor/v0.1/) and
+[`v0.2`](example/taste-extractor/v0.2/) trees intact. In the v0.2 redo, six
+no-skill baselines all sounded plausible and all passed their qualitative
+gates—yet together they scored only 10/30 on the prewritten implementation
+criteria. The final skill scored 30/30. This is why Dojo spars: vibes said
+“fine”; the scorecards found twenty missing pieces of traceability, transfer
+discipline, and handoff detail.
 
 The first five frozen candidates still did not graduate. Early bouts exposed
 an underspecified missing-video intake, principles escaping their evidence
@@ -140,16 +119,16 @@ with every qualitative gate green.
 
 | Stage | Receipt | What Happened |
 |---|---|---|
-| Intake | [`original-request.md`](example/taste-extractor/original-request.md) | Preserves the exact creation prompt. |
-| Precommitment | [`taste-extractor-scenarios.md`](example/taste-extractor/taste-extractor-scenarios.md) | Declares the claim, six training cells, three holdout shapes, trials, and evidence grade before scoring. |
-| Isolation | [`preflight.md`](example/taste-extractor/taste-extractor-runs/isolation/preflight.md), [`invalid-runs.md`](example/taste-extractor/taste-extractor-runs/isolation/invalid-runs.md) | Shows the three role canaries and keeps overwritten captures and a hidden criterion out of the score. |
-| Counterfactual | [`training-scorecard.md`](example/taste-extractor/taste-extractor-runs/training/training-scorecard.md), [`training/`](example/taste-extractor/taste-extractor-runs/training/) | Preserves all six tasks, criteria, no-skill outputs, final skilled outputs, and the 10/30 → 30/30 result. |
-| Corrections | [`corrections/`](example/taste-extractor/taste-extractor-runs/corrections/) | Keeps burned-attempt failures and affected-case regressions visible. |
-| Candidate | [`authoring-notes.md`](example/taste-extractor/candidate/authoring-notes.md), [`SKILL.md`](example/taste-extractor/candidate/taste-extractor/SKILL.md), [`FROZEN.md`](example/taste-extractor/candidate/FROZEN.md) | Connects every added instruction to an observed miss and pins the final candidate bytes. |
-| Graduation | [`held-out-custody.md`](example/taste-extractor/taste-extractor-runs/holdouts/held-out-custody.md), [`H16`](example/taste-extractor/taste-extractor-runs/holdouts/h16-craft-to-notifications/), [`H17`](example/taste-extractor/taste-extractor-runs/holdouts/h17-account-recovery/), [`H18`](example/taste-extractor/taste-extractor-runs/holdouts/h18-partial-video-posters/) | Three new post-freeze tasks score 5/5 with qualitative PASS. |
-| Routing | [`matrix.md`](example/taste-extractor/taste-extractor-runs/routing/matrix.md), [`judge-1.md`](example/taste-extractor/taste-extractor-runs/routing/judge-1.md), [`judge-2.md`](example/taste-extractor/taste-extractor-runs/routing/judge-2.md), [`routing-score.md`](example/taste-extractor/taste-extractor-runs/routing/routing-score.md) | Two clean proxy judges match all 15 declared owners: 30/30 decisions. |
-| Package | [`package-checks.md`](example/taste-extractor/taste-extractor-runs/package/package-checks.md), [`smoke-output.md`](example/taste-extractor/taste-extractor-runs/package/smoke-output.md), [`smoke-score.md`](example/taste-extractor/taste-extractor-runs/package/smoke-score.md) | Validates YAML and structure, discovers exactly one skill, invokes it cold, and rechecks the freeze digest. |
-| Record | [`taste-extractor-record.md`](example/taste-extractor/taste-extractor-record.md) | Rolls up the wins, burned attempts, invalid evidence, limits, and terminal verdict. |
+| Intake | [`original-request.md`](example/taste-extractor/v0.2/original-request.md) | Preserves the exact creation prompt. |
+| Precommitment | [`taste-extractor-scenarios.md`](example/taste-extractor/v0.2/taste-extractor-scenarios.md) | Declares the claim, six training cells, three holdout shapes, trials, and evidence grade before scoring. |
+| Isolation | [`preflight.md`](example/taste-extractor/v0.2/taste-extractor-runs/isolation/preflight.md), [`invalid-runs.md`](example/taste-extractor/v0.2/taste-extractor-runs/isolation/invalid-runs.md) | Shows the three role canaries and keeps overwritten captures and a hidden criterion out of the score. |
+| Counterfactual | [`training-scorecard.md`](example/taste-extractor/v0.2/taste-extractor-runs/training/training-scorecard.md), [`training/`](example/taste-extractor/v0.2/taste-extractor-runs/training/) | Preserves all six tasks, criteria, no-skill outputs, final skilled outputs, and the 10/30 → 30/30 result. |
+| Corrections | [`corrections/`](example/taste-extractor/v0.2/taste-extractor-runs/corrections/) | Keeps burned-attempt failures and affected-case regressions visible. |
+| Candidate | [`authoring-notes.md`](example/taste-extractor/v0.2/candidate/authoring-notes.md), [`SKILL.md`](example/taste-extractor/v0.2/candidate/taste-extractor/SKILL.md), [`FROZEN.md`](example/taste-extractor/v0.2/candidate/FROZEN.md) | Connects every added instruction to an observed miss and pins the final candidate bytes. |
+| Graduation | [`held-out-custody.md`](example/taste-extractor/v0.2/taste-extractor-runs/holdouts/held-out-custody.md), [`H16`](example/taste-extractor/v0.2/taste-extractor-runs/holdouts/h16-craft-to-notifications/), [`H17`](example/taste-extractor/v0.2/taste-extractor-runs/holdouts/h17-account-recovery/), [`H18`](example/taste-extractor/v0.2/taste-extractor-runs/holdouts/h18-partial-video-posters/) | Three new post-freeze tasks score 5/5 with qualitative PASS. |
+| Routing | [`matrix.md`](example/taste-extractor/v0.2/taste-extractor-runs/routing/matrix.md), [`judge-1.md`](example/taste-extractor/v0.2/taste-extractor-runs/routing/judge-1.md), [`judge-2.md`](example/taste-extractor/v0.2/taste-extractor-runs/routing/judge-2.md), [`routing-score.md`](example/taste-extractor/v0.2/taste-extractor-runs/routing/routing-score.md) | Two clean proxy judges match all 15 declared owners: 30/30 decisions. |
+| Package | [`package-checks.md`](example/taste-extractor/v0.2/taste-extractor-runs/package/package-checks.md), [`smoke-output.md`](example/taste-extractor/v0.2/taste-extractor-runs/package/smoke-output.md), [`smoke-score.md`](example/taste-extractor/v0.2/taste-extractor-runs/package/smoke-score.md) | Validates YAML and structure, discovers exactly one skill, invokes it cold, and rechecks the freeze digest. |
+| Record | [`taste-extractor-record.md`](example/taste-extractor/v0.2/taste-extractor-record.md) | Rolls up the wins, burned attempts, invalid evidence, limits, and terminal verdict. |
 
 ### Taste Extractor v0.1 vs v0.2
 
@@ -327,10 +306,11 @@ behavior has survived contact with reality.”
 ## Repository Layout
 
 ```text
-skills/dojo/       installable Agent Skill
-evidence/          curated evidence and validation records
-example/           sanitized, receipt-complete worked example
-docs/assets/       repository artwork
+skills/dojo/                         installable Agent Skill
+evidence/                            curated evidence and validation records
+example/taste-extractor/v0.1/        historical compact campaign
+example/taste-extractor/v0.2/        audited expanded campaign
+docs/assets/                         repository artwork
 ```
 
 ---
@@ -359,5 +339,32 @@ MIT © 2026 Andre Ratzenberger
 - Reclassified the original checked-in campaigns as historical v1 evidence.
 - Rebuilt Taste Extractor under v0.2, preserved five burned freezes, graduated
   the sixth on three fresh 5/5 holdouts, and compared it honestly with v0.1.
+- Preserved both complete campaigns under side-by-side `v0.1/` and `v0.2/`
+  folders with an artifact-level comparison index.
 
 See [`CHANGELOG.md`](CHANGELOG.md) for the complete release history.
+
+---
+
+## Dojo Put Itself On The Mat
+
+**Release status: APPROVED.** Dojo compared its released contract with the new
+candidate, tested the changed behavior under pressure, and made contamination
+handling survive unseen cases.
+
+| Self-test result | Score |
+|---|---:|
+| Released behaviors corrected | **7** |
+| Strong released defaults preserved | **2** |
+| Time, sunk-cost, and authority pressure variants | **3/3 at 5/5** |
+| Audited capability-envelope calibrations | **5/5 boundaries held** |
+| Current-contract boundary proof | **3/3 boundaries held** |
+| Unseen evidence-integrity decisions | **3/3 satisfy the current five checks** |
+| Contaminated runs counted as evidence | **0** |
+
+The unseen evidence-integrity case mixed two clean trials with one scorer-
+contaminated trial. Every independent runner preserved the clean observations,
+marked the contaminated trial `INVALID`, required a fresh replacement, and
+withheld graduation until the missing evidence exists. That is the behavior
+Dojo exists to produce. Read the complete curated receipt in
+[`evidence/dojo-v0.2-self-test.md`](evidence/dojo-v0.2-self-test.md).

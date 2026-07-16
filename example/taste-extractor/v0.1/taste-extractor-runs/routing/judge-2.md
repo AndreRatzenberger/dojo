@@ -1,0 +1,15 @@
+1: taste-extractor
+2: taste-extractor
+3: taste-extractor
+4: taste-extractor
+5: taste-extractor
+6: taste-extractor
+7: taste-extractor
+8: taste-extractor
+9: taste-extractor
+10: skill-creator
+11: dojo
+12: imagegen
+13: humanizer
+14: naming-as-design
+15: james

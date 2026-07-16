@@ -68,6 +68,8 @@ All notable changes to Dojo are documented here.
   corrections, five honestly burned candidate freezes, three fresh final
   holdouts at 15/15, routing, package smoke, and a receipt-backed v0.1 versus
   v0.2 comparison.
+- Placed the complete historical v0.1 and audited v0.2 Taste Extractor trees in
+  side-by-side version folders with an artifact-level comparison index.
 
 ### Evidence migration
 
