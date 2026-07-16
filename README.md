@@ -3,12 +3,9 @@
 </p>
 
 <p align="center">
-  <a href="https://agentskills.io"><img src="https://img.shields.io/badge/Agent%20Skill-open%20format-43d9ad.svg" alt="Open Agent Skill"></a>
-  <a href="evidence/dojo-v0.3-change-record.md"><img src="https://img.shields.io/badge/v0.3%20change-PASS-43d9ad.svg" alt="v0.3 change passed"></a>
-  <a href="evidence/dojo-v0.2-self-test.md"><img src="https://img.shields.io/badge/v0.2%20self--test-APPROVED-43d9ad.svg" alt="v0.2 self-test approved"></a>
-  <a href="evidence/dojo-v0.2-change-record.md"><img src="https://img.shields.io/badge/evidence-curated%20record-f0a54b.svg" alt="Curated evidence record"></a>
-  <a href="skills/dojo/SKILL.md"><img src="https://img.shields.io/badge/output-~%2F.dojo-9b7bff.svg" alt="Output under ~/.dojo"></a>
-  <a href="LICENSE"><img src="https://img.shields.io/badge/License-MIT-yellow.svg" alt="License: MIT"></a>
+  <a href="https://github.com/AndreRatzenberger/dojo/stargazers"><img src="https://img.shields.io/github/stars/AndreRatzenberger/dojo?style=flat-square" alt="GitHub stars"></a>
+  <a href="https://github.com/AndreRatzenberger/dojo/commits/main"><img src="https://img.shields.io/github/last-commit/AndreRatzenberger/dojo?style=flat-square" alt="Last commit"></a>
+  <a href="LICENSE"><img src="https://img.shields.io/github/license/AndreRatzenberger/dojo?style=flat-square" alt="License"></a>
 </p>
 
 <p align="center">
