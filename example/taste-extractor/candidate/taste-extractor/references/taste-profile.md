@@ -100,8 +100,13 @@ hero fragment:
   interaction states
 - prose: several passages including transitions and endings
 - images: multiple representative works or high-resolution regions
-- video: ordered clips or timestamped frames plus motion and sound notes
-- audio: playable excerpts or timestamped listening notes
+- video: the accessible video with sound, or ordered clips or timestamped
+  frames with descriptions of visible composition, space, materials, motion or
+  camera behavior, and meaningful audio notes or a transcript
+- audio: a lawful playable excerpt or full recording paired with timestamped
+  listening notes; if audio cannot be shared, request timestamped observations
+  from an authorized listener and practical substitutes such as a transcript,
+  score, waveform or spectrogram, or creator-provided description
 - objects and places: multiple views, scale, material, construction, and use
   observations
 - services and rituals: steps, roles, feedback, exceptions, and recovery

@@ -1,108 +1,69 @@
-# Dojo scenarios — taste-extractor
+# Dojo scenarios — taste-extractor v0.2 redo
 
-Repository root: <repository-root>
-Root resolution: git
-Repository slug: dojo
+Repository root: `<repository-root>`
+Root resolution: `git`
+Repository slug: `dojo`
+Candidate skill path:
+`<repository-root>/example/taste-extractor/candidate/taste-extractor`
 
-Date: 2026-07-15
-Host: fresh agent contexts
-Model identifier: not exposed by host
-Isolation: v1 fresh-context only; prompt boundary without a v0.2 canary or complete trace
+Date: 2026-07-16
 Tier: technique
-
-> **v0.2 evidence classification:** historical `fresh-context only`, not
-> retroactively audited instruction-bounded evidence.
-
-Criteria were written before any behavior run. Training scenarios may inform
-bounded edits. Holdouts were kept outside the authoring loop, then run once
-after the candidate was frozen.
+Host: clean ephemeral Codex CLI contexts
+Model: `gpt-5.6-sol`
+Evidence: audited instruction-bounded
+Training trials: one per case
+Final holdout trials: one per cell
 
 ## Claim
 
-Given accessible evidence from any medium, `taste-extractor` should separate
-source content from portable style, trace its abstractions to observations,
-distinguish invariants from adaptable qualities, and produce an actionable
-handoff that another agent can use without copying the source. When the source
-cannot be inspected, it should refuse to invent a taste profile and request
-the missing evidence.
+Compared with no skill, `taste-extractor` more reliably converts accessible
+evidence from varied media into an original, evidence-traced,
+implementation-ready taste handoff and handles partial or missing evidence
+without invention.
 
-## T1 — Interface to interface
+## Predeclared coverage ledger
 
-Archetype: extract taste within the same medium.
-
-Observable criteria:
-
-1. Separates direct observations from inferred taste principles.
-2. Covers composition, typography, color, density, motion, and interaction.
-3. Distinguishes invariants from adaptable choices.
-4. Names anti-patterns and source-copying boundaries.
-5. Produces an actionable downstream handoff and yes/no validation checks.
-
-Expected baseline weakness: an attractive mood-board summary without explicit
-evidence mapping, adaptation rules, or a testable handoff.
-
-## T2 — Prose to prose
-
-Archetype: extract taste while separating voice from story content.
-
-Observable criteria:
-
-1. Separates narrative facts and distinctive phrases from reusable style.
-2. Analyzes syntax, cadence, diction, narrative distance, humor, and omission.
-3. Traces every major principle to a concrete source observation.
-4. Translates the profile specifically for onboarding microcopy.
-5. Supplies originality guardrails and yes/no validation checks.
-
-Expected baseline weakness: loose adjectives or imitation that reuses the
-passage's nouns, metaphors, or sentence shapes.
-
-## T3 — Ceramics to a status page
-
-Archetype: translate taste across media.
-
-Observable criteria:
-
-1. Reads form, material, imperfection, palette, spacing, and collection rhythm.
-2. Separates medium-specific surface from portable principles.
-3. Maps each retained principle to a concrete status-page decision.
-4. Rejects literal pottery decoration and other shallow visual copying.
-5. Produces an implementation handoff another agent can follow.
-
-Expected baseline weakness: literal beige-and-clay styling without a defensible
-translation from physical craft to interface behavior.
-
-## T4 — Unavailable source
-
-Archetype: degraded dependency handling.
-
-Observable criteria:
-
-1. States that the source cannot be inspected from the supplied context.
-2. Makes no source-specific observations or inferred taste claims.
-3. Requests an accessible artifact or structured observations.
-4. Offers a medium-aware intake checklist rather than fabricating a profile.
-
-Expected baseline weakness: guessing a profile from the title, URL, or user's
-desired output.
-
-## Heldouts
-
-Two holdouts are stored in `taste-extractor-runs/holdouts/held-out-custody.md`.
-They were designed in a fresh context and must not be opened until the
-candidate skill is frozen after the training runs. Custody SHA-256:
-`337f6c7fcfce50f17dedf8dc1b3bbb787ffa82b8f4deb63b21a1d9223db2cd3e`.
-
-## Result ledger
-
-| Run | Result | Notes |
+| Claim cell | Training case | Reserved holdout shape |
 |---|---|---|
-| T1 baseline | 5/5 | Strong default interface extraction |
-| T2 baseline | 4/5 | No principle-by-principle evidence trace |
-| T3 baseline | 5/5 | Strong default cross-medium translation |
-| T4 baseline | 4/4 | Correct missing-source refusal |
-| T1 skilled | 5/5 | Regression preserved; explicit trace and contract |
-| T2 skilled | 5/5 | Taste Trace corrected the observed failure |
-| T3 skilled | 5/5 | Regression preserved; stable receipt shape |
-| T4 skilled | 4/4 | Safe refusal preserved and formalized |
-| Holdout 1 | 5/5 | One-shot graduation run passed after freeze |
-| Holdout 2 | 5/5 | One-shot graduation run passed after freeze |
+| Same-medium extraction across states | T1 interface family | recurring corpus with an outlier |
+| Voice without copying content | T2 prose family | cross-medium originality transfer |
+| Temporal cross-medium translation | T3 audio to facilitation | time-based source to an operational protocol |
+| Physical relationships without decorative copying | T4 craft collection to status service | corpus recurrence and functional translation |
+| Service sequence, exception, and recovery | T5 ritual to onboarding flow | breakdown, authority, and staged recovery |
+| Partial or absent evidence | T6 partial video | partial or fully unavailable modality |
+| Complete downstream contract | T1-T5 | implementation-ready held-out handoff |
+
+Six training cases and three holdout cells were chosen because the broad medium
+claim has more uncertainty across kinds of evidence than across repeated
+samples of the same prompt. The one-trial design is breadth evidence, not a
+statistical reliability claim.
+
+## Isolation contract
+
+Runner, grader, and custodian preflights each returned `MISSING_CONTEXT`, saw no
+outside canary, and reported only their allowed task path. Baselines saw one
+task. Skilled runners saw one task plus the candidate. Graders saw one task,
+its prewritten criteria, and one blinded output. The final custodian saw only
+the claim, interface, abstract cells, and trial count.
+
+## Attempt ledger
+
+| Attempt | Result | Disposition |
+|---|---|---|
+| a1 | H1 5/5, H2 5/5, H3 4/5 | burned; missing-video substitute package corrected |
+| a2 | new cases exposed trace reuse, action-register, audio-intake, and authority gaps | burned; each affected case became regression evidence |
+| a3 | H7-H9 each 5/5, but final training regression returned T1 4/5 and T2 3/5 | burned; priority, prose-axis, and quotation rules tightened |
+| a4 | H10 5/5, H11 4/5, H12 4/5 | burned; exact schema/count semantics and per-axis coordinates corrected |
+| a5 | H13 5/5, H14 4/5, H15 5/5 | burned; every supported prose matrix cell required its own quote |
+| a6 | H16 5/5, H17 5/5, H18 5/5; all qualitative gates PASS | graduated |
+
+One a2 criterion was invalidated because it required an append-only test absent
+from the task. It contributed no score. The final custodian had to quote the
+task basis for every criterion before release.
+
+## Status
+
+Final candidate revision:
+`sha256:b5ade59ca5952440b433fa122e40c0c69f0d5c62d9e98145021a74a2e1cf987f`.
+
+Terminal outcome: **GRADUATED**.

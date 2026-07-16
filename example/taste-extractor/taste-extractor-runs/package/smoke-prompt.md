@@ -1,26 +1,9 @@
-# Clean-context smoke prompt
+# Cold package smoke
 
-Load and follow the Agent Skill at
-`<dojo-runtime>/candidate/taste-extractor/SKILL.md` and
-its directly required reference. Do not inspect scenarios, prior runs, scores,
-holdouts, or candidate notes.
+Use the taste-extractor skill on this accessible evidence:
 
-Source medium: packaging system.
+- Sign A uses a single lowercase word, generous empty space, matte navy, and one tiny amber dot.
+- Sign B uses a different lowercase word, generous empty space, matte green-black, and one tiny amber square.
+- Sign C uses a third lowercase word, generous empty space, matte charcoal, and one tiny amber dash.
 
-Accessible evidence:
-
-- Three tea tins share a tall narrow cylinder, matte ivory paper label, and one
-  small black serif product name aligned low on the front.
-- Each tin has one irregular vertical ink wash in a different muted color. The
-  wash stops before both label edges and never sits behind text.
-- Brewing instructions are hidden beneath the lid. The exterior shows only
-  tea name, origin, harvest month, and weight.
-- A gift edition adds gold foil and a wide ribbon; its production note says
-  those are seasonal additions, not system rules.
-
-Downstream target: a fourth everyday tea tin designed by another agent.
-
-Task: extract a reusable taste profile and implementation handoff. Do not
-design the fourth tin itself.
-
-Return raw working data for the package smoke receipt.
+Produce a compact, evidence-traced taste handoff for a three-state notification sound. Keep the result original and implementation-ready.

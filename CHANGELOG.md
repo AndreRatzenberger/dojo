@@ -63,14 +63,19 @@ All notable changes to Dojo are documented here.
   “touched kata” shortcut.
 - Edit-improvement claims compare against the released version; no-skill
   baselines remain valid only for absolute skill-value claims.
+- Rebuilt the Taste Extractor worked example as a native v0.2 campaign: six
+  counterfactual training pairs, role canaries, invalid-run accounting, bounded
+  corrections, five honestly burned candidate freezes, three fresh final
+  holdouts at 15/15, routing, package smoke, and a receipt-backed v0.1 versus
+  v0.2 comparison.
 
 ### Evidence migration
 
-- The original standalone and taste-extractor campaigns are preserved as v1
-  historical records.
-- Because they predate canary preflights and path/tool-trace requirements, they
-  are classified as fresh-context-only evidence under the v0.2 model rather
-  than being retroactively upgraded.
+- The original standalone campaign remains a v1 historical record and is not
+  retroactively upgraded.
+- The v0.1 Taste Extractor remains available through repository history; the
+  checked-in worked example now carries fresh v0.2 evidence and an explicit
+  comparison with that earlier candidate.
 
 ## 0.1.0 — 2026-07-15
 

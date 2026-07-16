@@ -1,13 +1,12 @@
-# Clean-context package smoke score
+# Clean package smoke score
 
-Result: **pass**
+Result: **PASS**
 
 | Check | Result | Evidence |
 |---|---|---|
-| Skill contract loaded | pass | The output follows the candidate's complete profile contract, including source access, Taste Trace, transfer layers, invariants, degrees of freedom, production sequence, downstream prompt, checks, and final report. |
-| Required reference loaded | pass | The response uses the detailed profile schema defined in the directly required reference rather than returning an informal style summary. |
-| Requested behavior | pass | It extracts the three-tin packaging grammar and hands off a fourth everyday member without designing that member. |
-| Exception boundary | pass | Gift-edition foil and ribbon remain explicit non-invariants. |
-| Unsupported precision | pass | Missing production assets and regulatory constraints are marked unresolved rather than invented. |
-
-The smoke run was performed in an isolated context against the frozen candidate.
+| Cold discovery | pass | The runner found the local skill and its direct reference inside an otherwise clean capsule. |
+| Evidence trace | pass | All four principles cite Signs A-C and record 3/3 recurrence. |
+| Cross-medium translation | pass | Graphic restraint becomes silence, dry timbre, one salient event, and bounded micro-variation rather than literal shape sonification. |
+| Implementation handoff | pass | The output supplies three bounded variants, a production sequence, a downstream prompt, and yes/no checks. |
+| Honest uncertainty | pass | State meanings, exact typography, scale, and playback context remain unresolved instead of being guessed. |
+| Boundary | pass | Only the task and candidate files inside the smoke capsule were read; no files were written. |

@@ -1,24 +1,19 @@
 # Package checks
 
-Candidate tree digest:
-`01117cd40581534f188dc93461d53e96740ddd0d95815e23119853afc74d6643`
-
-Portable candidate content digest:
-`62704fed613ecb6751e106e20b1e98e133ad802882edf0028d73445483409cdd`
+Candidate revision:
+`sha256:b5ade59ca5952440b433fa122e40c0c69f0d5c62d9e98145021a74a2e1cf987f`
 
 | Check | Result |
 |---|---|
 | Standard Agent Skill validator | pass — `Skill is valid!` |
-| Skill directory equals frontmatter name | pass — `taste-extractor` |
-| Description length | pass — 629 characters |
-| Direct reference resolution | pass — `references/taste-profile.md` |
-| Agent metadata | pass — `$taste-extractor` default prompt present |
-| Isolated copy and byte comparison | pass — no difference |
-| Skills CLI discovery | pass — exactly one skill found |
-| Candidate tree unchanged after training | pass — frozen digest matched |
-| Candidate tree unchanged after both holdouts | pass — frozen digest matched |
-| Clean-context smoke invocation | pass — complete profile and handoff produced |
-| Routing proxy | pass — two judges, 30/30 declared decisions matched |
+| YAML frontmatter parse | pass — name and description present |
+| Candidate tree | pass — three regular files; no symlinks or special files |
+| Direct reference | pass — `references/taste-profile.md` resolves |
+| Agent metadata | pass — `agents/openai.yaml` parses and names the skill |
+| Skills CLI discovery | pass — exactly one skill, `taste-extractor` |
+| Routing proxy | pass — 30/30 declared decisions |
+| Clean-context smoke | pass — cold invocation produced the evidence trace and implementation handoff |
+| Frozen integrity | pass — digest matched before holdouts, after holdouts, and after smoke |
 
-The local Skills CLI source path is intentionally omitted from this receipt;
-the checked-in example uses `<candidate-root>` in command examples.
+Public command examples use `<candidate-root>`; local discovery paths are not
+part of this receipt.

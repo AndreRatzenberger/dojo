@@ -122,33 +122,67 @@ The example began with this request:
 > With Dojo, create a skill that extracts “taste” out of any medium so other
 > agents can produce entities of that medium in the same style.
 
-That sentence became a complete historical technique-tier run in
-[`example/taste-extractor/`](example/taste-extractor/). The baselines were
-awkward in the most useful way: three already passed. Dojo did not manufacture
-problems to look busy. The prose case scored 4/5 because its principles lacked
-a source-by-source evidence trace; the candidate added a mandatory Taste Trace
-and brought that case to 5/5 while preserving the others.
+The v0.2 redo is checked in at
+[`example/taste-extractor/`](example/taste-extractor/). Six no-skill baselines
+all sounded plausible and all passed their qualitative gates—yet together they
+scored only 10/30 on the prewritten implementation criteria. The final skill
+scored 30/30. This is why Dojo spars: vibes said “fine”; the scorecards found
+twenty missing pieces of traceability, transfer discipline, and handoff detail.
 
-> **Evidence classification:** this v1 campaign used fresh contexts and
-> prompt-level file restrictions, but predates the v0.2 canary preflight and
-> path/tool-trace contract. Dojo preserves it as useful historical evidence and
-> classifies it as `fresh-context only` rather than retroactively audited proof.
+The first five frozen candidates still did not graduate. Early bouts exposed
+an underspecified missing-video intake, principles escaping their evidence
+trace, actions escaping their coordinate table, a loose audio request, and
+collapsed decision authority. The third freeze passed its fresh holdouts but
+then failed the required final training regression. The fourth and fifth found
+exact-schema, per-axis-coordinate, and per-cell-quotation gaps. Each miss earned
+one bounded rule. The sixth freeze passed three new post-freeze holdouts at 5/5
+with every qualitative gate green.
 
 | Stage | Receipt | What Happened |
 |---|---|---|
 | Intake | [`original-request.md`](example/taste-extractor/original-request.md) | Preserves the exact creation prompt. |
-| Precommitment | [`taste-extractor-scenarios.md`](example/taste-extractor/taste-extractor-scenarios.md) | Defines four training cases and their checks before any run. |
-| Baseline | [`t1-interface/`](example/taste-extractor/taste-extractor-runs/t1-interface/), [`t2-prose/`](example/taste-extractor/taste-extractor-runs/t2-prose/), [`t3-cross-medium/`](example/taste-extractor/taste-extractor-runs/t3-cross-medium/), [`t4-missing-source/`](example/taste-extractor/taste-extractor-runs/t4-missing-source/) | Keeps every raw prompt, raw output, and criterion-level score before and after training. |
-| Write | [`authoring-notes.md`](example/taste-extractor/candidate/authoring-notes.md) and [`SKILL.md`](example/taste-extractor/candidate/taste-extractor/SKILL.md) | Shows why the Taste Trace was the smallest justified instruction. |
-| Freeze | [`FROZEN.md`](example/taste-extractor/candidate/FROZEN.md) | Freezes the candidate tree before either holdout is opened. |
-| Graduation | [`held-out-custody.md`](example/taste-extractor/taste-extractor-runs/holdouts/held-out-custody.md), [`holdout-1-score.md`](example/taste-extractor/taste-extractor-runs/holdouts/holdout-1-score.md), [`holdout-2-score.md`](example/taste-extractor/taste-extractor-runs/holdouts/holdout-2-score.md) | Both historical held-outs passed 5/5 once under the v1 fresh-context protocol; v0.2 does not retroactively upgrade them. |
-| Routing | [`matrix.md`](example/taste-extractor/taste-extractor-runs/routing/matrix.md), [`judge-1.md`](example/taste-extractor/taste-extractor-runs/routing/judge-1.md), [`judge-2.md`](example/taste-extractor/taste-extractor-runs/routing/judge-2.md), [`routing-score.md`](example/taste-extractor/taste-extractor-runs/routing/routing-score.md) | Two fresh-context proxy judges match all 15 declared owners: 30/30 decisions. |
-| Package | [`package-checks.md`](example/taste-extractor/taste-extractor-runs/package/package-checks.md), [`smoke-output.md`](example/taste-extractor/taste-extractor-runs/package/smoke-output.md), [`smoke-score.md`](example/taste-extractor/taste-extractor-runs/package/smoke-score.md) | Validates the folder, discovers exactly one skill, and invokes it cold. |
-| Record | [`taste-extractor-record.md`](example/taste-extractor/taste-extractor-record.md) | Rolls up the evidence and keeps the limitations visible. |
+| Precommitment | [`taste-extractor-scenarios.md`](example/taste-extractor/taste-extractor-scenarios.md) | Declares the claim, six training cells, three holdout shapes, trials, and evidence grade before scoring. |
+| Isolation | [`preflight.md`](example/taste-extractor/taste-extractor-runs/isolation/preflight.md), [`invalid-runs.md`](example/taste-extractor/taste-extractor-runs/isolation/invalid-runs.md) | Shows the three role canaries and keeps overwritten captures and a hidden criterion out of the score. |
+| Counterfactual | [`training-scorecard.md`](example/taste-extractor/taste-extractor-runs/training/training-scorecard.md), [`training/`](example/taste-extractor/taste-extractor-runs/training/) | Preserves all six tasks, criteria, no-skill outputs, final skilled outputs, and the 10/30 → 30/30 result. |
+| Corrections | [`corrections/`](example/taste-extractor/taste-extractor-runs/corrections/) | Keeps burned-attempt failures and affected-case regressions visible. |
+| Candidate | [`authoring-notes.md`](example/taste-extractor/candidate/authoring-notes.md), [`SKILL.md`](example/taste-extractor/candidate/taste-extractor/SKILL.md), [`FROZEN.md`](example/taste-extractor/candidate/FROZEN.md) | Connects every added instruction to an observed miss and pins the final candidate bytes. |
+| Graduation | [`held-out-custody.md`](example/taste-extractor/taste-extractor-runs/holdouts/held-out-custody.md), [`H16`](example/taste-extractor/taste-extractor-runs/holdouts/h16-craft-to-notifications/), [`H17`](example/taste-extractor/taste-extractor-runs/holdouts/h17-account-recovery/), [`H18`](example/taste-extractor/taste-extractor-runs/holdouts/h18-partial-video-posters/) | Three new post-freeze tasks score 5/5 with qualitative PASS. |
+| Routing | [`matrix.md`](example/taste-extractor/taste-extractor-runs/routing/matrix.md), [`judge-1.md`](example/taste-extractor/taste-extractor-runs/routing/judge-1.md), [`judge-2.md`](example/taste-extractor/taste-extractor-runs/routing/judge-2.md), [`routing-score.md`](example/taste-extractor/taste-extractor-runs/routing/routing-score.md) | Two clean proxy judges match all 15 declared owners: 30/30 decisions. |
+| Package | [`package-checks.md`](example/taste-extractor/taste-extractor-runs/package/package-checks.md), [`smoke-output.md`](example/taste-extractor/taste-extractor-runs/package/smoke-output.md), [`smoke-score.md`](example/taste-extractor/taste-extractor-runs/package/smoke-score.md) | Validates YAML and structure, discovers exactly one skill, invokes it cold, and rechecks the freeze digest. |
+| Record | [`taste-extractor-record.md`](example/taste-extractor/taste-extractor-record.md) | Rolls up the wins, burned attempts, invalid evidence, limits, and terminal verdict. |
+
+### Taste Extractor v0.1 vs v0.2
+
+**Verdict: v0.2 is the better skill for the promise this example makes.** v0.1
+was a good compact extractor; v0.2 is a dependable handoff protocol. The gain
+is not more adjectives. It is making source access, recurrence, inference,
+authority, and every downstream action inspectable.
+
+This is a comparison of the two finished skill contracts and their receipts,
+not a claim that v0.1 scored 10/30: that 10/30 result belongs to the no-skill
+baseline. The current campaign did not pretend those are the same control.
+
+| | v0.1 | v0.2 | Why v0.2 is better |
+|---|---|---|---|
+| Evidence trace | One row for each major principle | Stable IDs for every inference, with every later use linked back | Principles cannot quietly mutate or appear without evidence. |
+| Multi-work corpora | Could cite several works | Requires source IDs, recurrence weight, and outlier quarantine | One seductive exception cannot hijack the supposed shared taste. |
+| Partial evidence | Strong unavailable-source refusal, but no explicit partial mode | Provisional label, supported-axis accounting, named unknowns, bounded rules | Four stills no longer become imaginary motion or sound. |
+| Missing-media intake | General clips, frames, or listening notes | Concrete visual, spatial, material, motion, sound, lawful-audio, and authorized-substitute requirements | The next evidence request is actually sufficient to continue. |
+| High-stakes language | Accessibility and correctness outrank style | Errors, identity, consent, fees, security, permissions, and risk stay literal | Extracted voice cannot blur consequential product language. |
+| Operational translation | Useful target rules and checks | Complete action register, explicit authorities, handoffs, prohibitions, and uniqueness invariants | Another agent can implement the protocol without reconstructing hidden context. |
+| Exact contracts | General output structure | Exact labels, enumerations, state lists, counts, per-row coordinates, and per-cell quotes survive handoff | Dense implementation contracts no longer pass while quietly dropping fields. |
+| Evidence behind the claim | Earlier fresh-context campaign | Canary-preflighted roles, six counterfactual pairs, five burned freezes, three final holdouts, routing, and cold smoke | The claim now rests on an auditable v0.2 campaign. |
+| Cost | 5,207-byte main skill; 3,723-byte reference | 9,538-byte main skill; 4,107-byte reference | About 53% more instruction material buys the stronger contract. |
+
+v0.1 still wins one narrow contest: it is lighter. If the job is casual
+inspiration and nobody downstream needs to audit or implement the result, its
+smaller contract may be enough. For “extract from any medium so another agent
+can reliably create from it,” v0.2 wins decisively.
 
 The result is not just a taste-extractor skill. It is the skill plus the
-training tape, scorecards, held-out bouts, routing drill, equipment check, and
-the note saying exactly where the black belt still does **not** apply.
+training tape, burned belts, scorecards, held-out bouts, routing drill,
+equipment check, and the note saying exactly where the black belt still does
+**not** apply.
 
 ---
 
@@ -323,5 +357,7 @@ MIT © 2026 Andre Ratzenberger
   defaults, corrected seven gaps, passed all three pressure variants, and
   rejected contaminated evidence in unseen trials.
 - Reclassified the original checked-in campaigns as historical v1 evidence.
+- Rebuilt Taste Extractor under v0.2, preserved five burned freezes, graduated
+  the sixth on three fresh 5/5 holdouts, and compared it honestly with v0.1.
 
 See [`CHANGELOG.md`](CHANGELOG.md) for the complete release history.

@@ -1,6 +1,6 @@
 # Isolated routing catalog
 
-Host: routing proxy  
+Host: routing proxy
 Date: 2026-07-15
 
 This is the complete active catalog for the isolated example environment. The
