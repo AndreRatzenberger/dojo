@@ -4,7 +4,8 @@
 
 <p align="center">
   <a href="https://agentskills.io"><img src="https://img.shields.io/badge/Agent%20Skill-open%20format-43d9ad.svg" alt="Open Agent Skill"></a>
-  <a href="evidence/dojo-v0.2-self-test.md"><img src="https://img.shields.io/badge/self--test-APPROVED-43d9ad.svg" alt="Self-test approved"></a>
+  <a href="evidence/dojo-v0.3-change-record.md"><img src="https://img.shields.io/badge/v0.3%20change-PASS-43d9ad.svg" alt="v0.3 change passed"></a>
+  <a href="evidence/dojo-v0.2-self-test.md"><img src="https://img.shields.io/badge/v0.2%20self--test-APPROVED-43d9ad.svg" alt="v0.2 self-test approved"></a>
   <a href="evidence/dojo-v0.2-change-record.md"><img src="https://img.shields.io/badge/evidence-curated%20record-f0a54b.svg" alt="Curated evidence record"></a>
   <a href="skills/dojo/SKILL.md"><img src="https://img.shields.io/badge/output-~%2F.dojo-9b7bff.svg" alt="Output under ~/.dojo"></a>
   <a href="LICENSE"><img src="https://img.shields.io/badge/License-MIT-yellow.svg" alt="License: MIT"></a>
@@ -42,10 +43,45 @@ for a user-level installation.
 
 ## Enter The Dojo
 
-Graduation-grade evidence requires a fresh context and an audited information
-boundary: exact allowed roots, a canary preflight, and an inspected path or tool
-audit. A fresh agent without that boundary may provide exploratory feedback,
-but not clean baseline or graduation proof.
+Dojo now opens with two doors and tells you what each one costs before anybody
+starts doing push-ups.
+
+| Lane | Best For | What Happens |
+|---|---|---|
+| **Fast Lane** | Early creation, ordinary hardening, focused edits, quick feedback | Fresh runners receive explicit “do not spelunk” boundaries; Dojo runs the affected comparison, bounded fixes, one fresh check, and applicable routing/package work. No custody bureaucracy or fake graduation claim. |
+| **Audit Lane** | Graduation, publishing, benchmarks, high-risk or contamination-sensitive claims | Full v0.2 isolation: exact envelopes, canaries, inspected traces, frozen candidates, role-separated held-outs, and invalid-run accounting. Machine manifests appear only when the package actually has hidden evaluator files, scripts, tool receipts, artifacts, or portability claims. |
+
+With no argument, `--lane auto` shows a compact overview of both lanes,
+recommends one, explains why, and starts without a confirmation ritual. Lane
+controls evidence rigor; discipline, technique, and reference still control
+which kata apply.
+
+```text
+Use $dojo --lane auto to harden this skill.
+```
+
+For deterministic automation and benchmark matrices, pin the lane:
+
+```text
+Use $dojo --lane fast --quiet to run the focused skill check.
+Use $dojo --lane audit --quiet to run the audit-grade campaign.
+```
+
+Dojo also accepts `--fast-lane true` and `--audit-lane true` as convenience
+aliases. Conflicting selectors fail as `INVALID_LANE`; an explicit lane never
+silently changes underneath a benchmark.
+
+These are arguments in the skill invocation, not a `dojo` shell executable.
+Automation sends them with the prompt or host skill call.
+
+Interactive campaigns include a compact milestone/ETA ticker. It stays out of
+final answers, runner prompts, evidence, JSON, exact-output tasks, and every
+`--quiet` invocation.
+
+Graduation-grade evidence still requires a fresh context and an audited
+information boundary: exact allowed roots, a canary preflight, and an inspected
+path or tool audit. Fast Lane provides useful working confidence, not a black
+belt with the serial number filed off.
 
 ```text
 Use $dojo to prove this skill changes behavior before we publish it.
@@ -85,6 +121,11 @@ explains why this particular skill deserves to exist.
 | Routing judges | Evidence that the skill enters its own bouts and leaves neighboring skills alone. |
 | Package checks and smoke run | Proof that the installable folder is valid, discoverable, and usable cold. |
 | Final Dojo record | The honest roll-up: wins, failures, loopholes, limitations, and one terminal verdict. |
+
+Fast Lane compresses these into one lightweight record: exact prompts and
+results, affected checks, bounded edits, a fresh different-in-kind check,
+applicable routing/package results, limitations, and `FAST-LANE PASS`,
+`FAST-LANE FAIL`, or `UNPROVEN`. Audit Lane keeps the complete receipt set.
 
 Raw evidence normally lives under `~/.dojo/`. A checked-in example must first
 replace machine paths and runner identities with neutral placeholders. The
@@ -207,6 +248,10 @@ correctness, trigger, and package checks. Technique skills add baseline and
 held-out behavior. Discipline skills also get separate time, sunk-cost, and
 authority pressure runs. Narrow edits rerun only the affected gate.
 
+The lane controls how strongly those results may be claimed. Fast Lane uses
+fresh instruction-bounded runners and stays non-graduation evidence. Audit Lane
+adds the boundary and custody work required for a black belt.
+
 ---
 
 ## Isolation Matters
@@ -307,9 +352,12 @@ behavior has survived contact with reality.”
 
 ```text
 skills/dojo/                         installable Agent Skill
+skills/dojo/assets/harness-template/ optional complex Audit Lane template
+skills/dojo/scripts/dojo_harness.py  portable contract validator
 evidence/                            curated evidence and validation records
 example/taste-extractor/v0.1/        historical compact campaign
 example/taste-extractor/v0.2/        audited expanded campaign
+tests/test_dojo_harness.py            focused validator regressions
 docs/assets/                         repository artwork
 ```
 
@@ -322,6 +370,21 @@ MIT © 2026 Andre Ratzenberger
 ---
 
 ## Changelog
+
+### 0.3.0 — 2026-07-16
+
+- Added Fast Lane and Audit Lane with a compact default comparison and an
+  automatic recommendation that does not pause for ceremony.
+- Added deterministic `--lane auto|fast|audit`, compatibility aliases, and
+  `--quiet` for exact-output automation and benchmark matrices.
+- Added the interactive milestone/ETA ticker without contaminating finals,
+  runner output, evidence, or machine-readable artifacts.
+- Added a complexity-triggered portable Audit Lane harness for hidden
+  evaluator material, dependency closure, trace-derived receipts, and external
+  artifact hashes.
+- Rejected nested symlink leakage, empty required telemetry, undeclared events,
+  host allowlist bypasses, traversal references, malformed artifact roots, and
+  timestamp reversal with focused standard-library regressions.
 
 ### 0.2.0 — 2026-07-16
 
@@ -348,9 +411,28 @@ See [`CHANGELOG.md`](CHANGELOG.md) for the complete release history.
 
 ## Dojo Put Itself On The Mat
 
-**Release status: APPROVED.** Dojo compared its released contract with the new
-candidate, tested the changed behavior under pressure, and made contamination
-handling survive unseen cases.
+**v0.3 focused change: PASS.** Dojo exercised its own lane selectors, progress
+tracker, no-spelunk boundary, and portable validator before presenting them as
+the new default.
+
+| v0.3 check | Result |
+|---|---:|
+| Auto, explicit, alias, quiet, and conflicting selector behavior | **5/5** |
+| Fresh Fast Lane no-spelunk calibration | **boundary held** |
+| Audited lane-contract calibration | **boundary held** |
+| Intermediate updates with ticker / final answers with ticker | **3/3 / 0/1** |
+| Portable harness regressions | **11/11** |
+| Bundled run and package preflights | **2/2** |
+
+The first audited run also caught an invocation ambiguity: a runner tried to
+find a `dojo` executable. The bounded fix made lane arguments explicitly
+prompt-level, and a clean regression parsed them without probing for a CLI.
+Read the scoped receipt in
+[`evidence/dojo-v0.3-change-record.md`](evidence/dojo-v0.3-change-record.md).
+
+**v0.2 foundation: APPROVED.** Dojo compared its released contract with the
+new candidate, tested the changed behavior under pressure, and made
+contamination handling survive unseen cases.
 
 | Self-test result | Score |
 |---|---:|

@@ -1,0 +1,84 @@
+{
+  "schema_version": "dojo.package/v1",
+  "package_id": "replace-with-unique-package-id",
+  "package_root": ".",
+  "run_manifest": "run-manifest.json",
+  "runner_visible": [
+    "task.md",
+    "fixtures"
+  ],
+  "evaluator_only": [
+    "evaluation"
+  ],
+  "required_files": [
+    "run-manifest.json",
+    "task.md",
+    "fixtures/context.json",
+    "evaluation/contract.json"
+  ],
+  "clean_directories": [
+    {
+      "path": "work",
+      "allow": [
+        ".gitkeep"
+      ]
+    }
+  ],
+  "dependencies": [
+    {
+      "consumer": "task.md",
+      "requires": [
+        "fixtures/context.json"
+      ],
+      "audience": "runner"
+    }
+  ],
+  "static_reference_scan": [
+    "task.md"
+  ],
+  "contract_mirrors": [
+    {
+      "left": {
+        "file": "run-manifest.json",
+        "pointer": "/capabilities/network/mode"
+      },
+      "right": {
+        "file": "evaluation/contract.json",
+        "pointer": "/network_mode"
+      }
+    },
+    {
+      "left": {
+        "file": "run-manifest.json",
+        "pointer": "/capabilities/write/allow"
+      },
+      "right": {
+        "file": "evaluation/contract.json",
+        "pointer": "/write_roots"
+      }
+    }
+  ],
+  "evidence_requirements": [
+    {
+      "event_kind": "filesystem.read",
+      "fields": [
+        "data.path",
+        "time"
+      ]
+    },
+    {
+      "event_kind": "filesystem.write",
+      "fields": [
+        "data.path",
+        "time"
+      ]
+    }
+  ],
+  "artifact_policy": {
+    "algorithm": "sha256",
+    "roots": [
+      "work"
+    ],
+    "manifest_path": "evidence/artifacts.json"
+  }
+}

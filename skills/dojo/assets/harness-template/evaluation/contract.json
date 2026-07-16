@@ -1,0 +1,9 @@
+{
+  "network_mode": "disabled",
+  "write_roots": [
+    "work"
+  ],
+  "required_outputs": [
+    "work/result.md"
+  ]
+}

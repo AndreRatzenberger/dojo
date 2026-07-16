@@ -4,7 +4,7 @@
 
 A fresh context prevents conversational leakage, but a runner may still search
 sibling fixtures, prior outputs, authoring notes, installed skills, or held-out
-criteria. Dojo prevents that contamination with three concrete controls:
+criteria. Audit Lane prevents that contamination with three concrete controls:
 
 1. an exact capability envelope naming every allowed read and write root;
 2. a canary preflight using the same runner configuration as the real run;
@@ -12,6 +12,14 @@ criteria. Dojo prevents that contamination with three concrete controls:
 
 If the runner leaves the declared boundary, the run is `INVALID`. Correct-looking
 output never rescues contaminated evidence.
+
+Fast Lane deliberately uses a smaller contract: one fresh runner, exact
+allowed paths, and explicit instructions not to inspect parents, siblings,
+skill stores, memories, prior runs, criteria, or expected answers. It requires
+the runner to report `MISSING_CONTEXT` instead of searching elsewhere and to
+list inspected paths. This is useful friction against accidental spelunking,
+but it remains `fresh-context only`; there is no canary or independent trace
+audit pretending otherwise. Use the exact Fast Lane prompt in `lanes.md`.
 
 ## Isolation Grades
 
@@ -82,6 +90,9 @@ the shared evidence tree.
 
 ## Capability Envelope
 
+This full envelope is for Audit Lane. Fast Lane uses the compact boundary in
+`lanes.md`.
+
 Send an audited runner an envelope at least this explicit:
 
 ```text
@@ -112,6 +123,8 @@ scope boundary held.
 ```
 
 ## Preflight The Harness
+
+This canary preflight belongs to Audit Lane. Fast Lane skips it by design.
 
 Before the real battery, test each distinct runner configuration once:
 
@@ -162,3 +175,8 @@ preflight, and path or tool audit. If the audit is unavailable, label the run
 `fresh-context only`. The capability contract is portable because it tells any
 runner exactly where it may work and makes every boundary escape invalidate the
 result.
+
+For an ordinary audited text run, stop there. Add machine-readable run/package
+manifests and canonical events only when the complexity triggers in
+`lanes.md` apply. This preserves a real audit path without turning every skill
+check into harness construction.

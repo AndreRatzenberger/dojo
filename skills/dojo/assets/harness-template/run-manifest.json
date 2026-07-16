@@ -1,0 +1,63 @@
+{
+  "schema_version": "dojo.run/v1",
+  "run_id": "replace-with-unique-run-id",
+  "role": "runner",
+  "isolation_grade": "audited_instruction_bounded",
+  "capsule_root": ".",
+  "working_directory": ".",
+  "capabilities": {
+    "read": {
+      "allow": [
+        "task.md",
+        "fixtures"
+      ],
+      "harness_inputs": [],
+      "deny": [
+        "evaluation",
+        "evidence",
+        "package-manifest.json",
+        "run-manifest.json"
+      ]
+    },
+    "write": {
+      "allow": [
+        "work"
+      ]
+    },
+    "network": {
+      "mode": "disabled",
+      "allowed_hosts": []
+    },
+    "memory": "disabled"
+  },
+  "telemetry": {
+    "events_path": "evidence/events.jsonl",
+    "required": true,
+    "required_event_kinds": [
+      "run.start",
+      "run.finish"
+    ],
+    "event_capabilities": {
+      "run.start": [
+        "time"
+      ],
+      "run.finish": [
+        "time"
+      ],
+      "filesystem.read": [
+        "data.path",
+        "time"
+      ],
+      "filesystem.write": [
+        "data.path",
+        "time"
+      ],
+      "process.exec": [
+        "data.command",
+        "data.cwd",
+        "time"
+      ]
+    },
+    "receipt_event_kinds": []
+  }
+}

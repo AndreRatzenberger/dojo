@@ -2,6 +2,51 @@
 
 All notable changes to Dojo are documented here.
 
+## 0.3.0 — 2026-07-16
+
+### Added
+
+- Fast Lane for focused skill creation and hardening with fresh runners,
+  explicit no-spelunk boundaries, affected comparisons, bounded edits, one
+  fresh different-in-kind check, and lightweight receipts.
+- Audit Lane for v0.2 isolation, canaries, inspected traces, candidate freeze,
+  role-separated held-outs, and graduation claims.
+- A compact default lane overview that explains both paths, recommends one,
+  records the reason, and proceeds without a confirmation gate.
+- Deterministic `--lane auto|fast|audit` selectors plus `--fast-lane` and
+  `--audit-lane` boolean aliases. Explicit selections are sticky and conflicts
+  return `INVALID_LANE`.
+- `--quiet` for benchmark and exact-output automation.
+- A user-facing milestone and ETA ticker scoped to interactive progress only.
+- A complexity-triggered `dojo.run/v1`, `dojo.package/v1`, and `dojo.event/v1`
+  portable Audit Lane harness with host-derived receipts and external artifact
+  hashing.
+- Eleven focused standard-library regressions for the portable validator.
+
+### Changed
+
+- Lane and tier are now independent: lane selects evidence rigor while
+  discipline, technique, and reference still select applicable kata.
+- Machine manifests are not required for ordinary audited text runs. The
+  v0.2 capability envelope, canary, and inspected native path/tool audit remain
+  sufficient unless package complexity triggers the portable harness.
+- Fast Lane uses `FAST-LANE PASS`, `FAST-LANE FAIL`, or `UNPROVEN` and cannot
+  claim graduation.
+
+### Fixed
+
+- Reject nested runner-visible symlinks that resolve into evaluator-only
+  material.
+- Reject empty required telemetry, missing required event kinds, and event
+  kinds not declared by the adapter.
+- Require structured hosts and absolute HTTP(S) result URLs for restricted
+  network evidence.
+- Reject traversal-style local references without misclassifying ordinary
+  HTTP URLs with ports as local dependencies.
+- Reject absent artifact roots, manifest-controlled exclusions, root identity
+  drift, symlinks, special files, and final-byte mismatches.
+- Reject reversed timestamp intervals and validate receipt identifiers.
+
 ## 0.2.0 — 2026-07-16
 
 ### Added

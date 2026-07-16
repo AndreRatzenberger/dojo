@@ -14,10 +14,49 @@ because its instructions sound convincing.
 Dojo is the verification layer. Reuse an installed skill creator or the host's
 normal scaffolding when useful; do not compete with it. Own evaluation,
 pressure, held-out graduation, routing checks, and the evidence record. When
-the user explicitly asks to build a skill through Dojo, run the full lifecycle.
-
+the user explicitly asks to build a skill through Dojo, run the selected lane
+end to end.
 For a narrow edit, use the edit-to-kata mapping below. State which kata are
 run, which are skipped, and why.
+
+## Start By Choosing A Lane
+
+Lane controls evidence rigor and cost. Tier controls which kata fit the skill.
+Do not confuse them. Read [`references/lanes.md`](references/lanes.md) before
+starting work.
+
+| Lane | Use it for | What it adds |
+|---|---|---|
+| **Fast Lane** | Early creation, ordinary hardening, focused edits, quick feedback | Fresh instruction-bounded runners, affected comparisons, one fresh check, applicable routing/package checks, lightweight receipts |
+| **Audit Lane** | Graduation, release proof, benchmarks, contamination-sensitive or high-risk claims | v0.2 isolation, canaries, inspected traces, role separation, frozen candidates, held-outs, and complexity-triggered portable preflight |
+
+The canonical automation selector is `--lane auto|fast|audit`; default is
+`auto`. Also accept `--fast-lane [true|false]` and
+`--audit-lane [true|false]` as aliases. Selectors are case-insensitive. More
+than one enabled selector or an unknown value is `INVALID_LANE`; do not guess.
+Explicit `fast` or `audit` is sticky: never silently switch it. `--quiet`
+suppresses the conversational overview and ticker for benchmark harnesses but
+does not remove lane metadata from receipts.
+For an interactive invocation without `--quiet`, give one compact pre-run
+overview: what Fast Lane would do, what Audit Lane would additionally do, the
+selected lane and reason, and the applicable versus skipped kata. Under
+`--lane auto`, recommend and select a lane without adding a confirmation gate.
+
+## User-Facing Progress
+
+While a Dojo campaign is active, end each useful interactive progress update
+with this compact ticker:
+
+```text
+Progress: ~<percent>% (<milestone> - <completed>/<total>, next: <next milestone>)
+ETA: ~<remaining duration | estimating | blocked on dependency>
+```
+
+Count declared campaign milestones or applicable kata, not tool calls. Update
+the estimate when the plan changes; do not fake precision and do not send a
+message solely to move the ticker. Keep these as the final two non-empty lines.
+Omit the ticker from final answers, runner prompts and outputs, evidence logs,
+JSON, exact-output tasks, and every `--quiet` invocation.
 
 ## Measurability Rule
 
@@ -47,8 +86,9 @@ same qualitative gate before opening another graduation attempt.
 | **Technique** | Multi-step orchestration | Baseline-fail plus skilled walkthrough |
 | **Reference** | Facts, flags, or recipes | Correctness review plus trigger evaluation |
 
-Every full campaign gets trigger evaluation. Only discipline skills require
-time, sunk-cost, and authority-pressure variants.
+Every full Audit Lane campaign gets trigger evaluation. Only Audit Lane
+discipline campaigns require all time, sunk-cost, and authority-pressure
+variants; Fast Lane keeps only affected pressure checks.
 
 When a skill mixes tiers, the highest-risk load-bearing behavior wins. Any
 rule whose value depends on resisting a plausible shortcut, authority claim,
@@ -57,11 +97,12 @@ campaign **discipline** unless that behavior is split into a separate skill.
 Use **technique** only when the hard part is orchestration competence rather
 than temptation resistance. Use **reference** only for lookup and correctness.
 
-For a reference-tier skill, run source-backed correctness review, trigger
-evaluation, and packaging. Mark behavioral RED/GREEN comparison, pressure
-variants, and held-out graduation as not applicable. If the candidate claims
-an operational workflow beyond reference lookup, classify it as technique
-instead of quietly expanding the reference tier. Read
+For a reference-tier Audit Lane campaign, run source-backed correctness review,
+trigger evaluation, and packaging. Fast Lane runs affected correctness plus
+routing only when routing changed. Mark behavioral RED/GREEN comparison,
+pressure variants, and held-out graduation as not applicable. If the candidate
+claims an operational workflow beyond reference lookup, classify it as
+technique instead of quietly expanding the reference tier. Read
 `references/reference-correctness.md` for the executable review contract.
 
 ## Narrow Edit Mapping
@@ -75,17 +116,24 @@ package validation, and a terminal verdict. Then apply this mapping:
 | Behavioral instructions or references | Isolation preflight; affected training cases plus adjacent regressions; new held-outs when the release behavior claim changes; package validation |
 | Reference facts or authoritative sources | Correctness review for every affected claim; package validation; trigger matrix only if routing text changed |
 | Isolation, runner, grader, or evidence semantics | Harness preflight; affected behavioral regressions; package validation |
+| Lane selection, overview, or progress behavior | Focused Fast/Audit lane regressions; exact-output contamination check; package validation |
 | Host metadata or package structure only | Package validation and clean-context smoke; trigger matrix when routing metadata changed |
 
 A documentation-only repository edit outside the installable skill is not a
 Dojo campaign. A skipped trigger or graduation kata is valid only when this
 table makes it unaffected and the record states that rationale.
 
+In Fast Lane, replace any held-out requirement with the fresh
+different-in-kind check from `lanes.md`; do not create custody machinery. A
+claim that the edit is proven for release belongs in Audit Lane.
+
 ## Establish Isolation Before Testing
 
 Fresh context alone is insufficient. A new runner may still spelunk through
 sibling seeds, criteria, prior runs, installed skill metadata, or the candidate
-itself. Choose and record the strongest available grade:
+itself. Fast Lane addresses this with an explicit no-spelunk instruction
+boundary and records `fresh-context only`; it does not claim audited evidence.
+Audit Lane chooses and records the strongest available grade:
 
 1. **Audited instruction-bounded** — a fresh context receives an exact
    capability envelope, unique run folder, canary preflight, and inspected
@@ -100,18 +148,29 @@ material, or other undeclared context makes the run `INVALID`, regardless of
 its output score. Replace invalid evidence before graduation. Read
 `references/isolation.md` before launching any behavioral runner.
 
+In Audit Lane, read `references/harness-contracts.md` only when the package has
+hidden evaluator assets, executable local dependencies, network/process/memory
+receipts, generated artifact proofs, a cross-host machine-verifiable claim, or
+an explicit portable-harness request. Ordinary audited text runs keep the v0.2
+envelope, canary, and inspected native path/tool audit without manufacturing
+extra manifests.
+
 ## The Seven Kata
+
+Audit Lane uses the applicable kata exactly as written below. Fast Lane uses
+them as a selection map, with its compact record and fresh check replacing the
+formal isolation manifest, candidate freeze, custody, and graduation ceremony.
 
 ### 1. Intake
 
-Classify the tier and whether this is a new skill or an edit. Build a coverage
-ledger across claimed modes, archetypes, state transitions, dependency states,
-output contracts, and safety boundaries. Select the smallest scenario set that
-covers the load-bearing cells and interactions. Complexity expands scenario
-breadth; risk and stochasticity expand independent trials. Hold out enough
-different-in-kind scenarios to cover unseen high-risk or cross-axis behavior.
+Classify the tier and whether this is a new skill or an edit. Audit Lane builds
+a coverage ledger across claimed modes, archetypes, state transitions,
+dependency states, output contracts, safety boundaries, and meaningful
+interactions, then reserves different-in-kind holdouts. Fast Lane names the
+affected claim and smallest useful cases, plus one fresh different-in-kind
+check. Complexity expands breadth; risk and stochasticity expand trials.
 
-Persist the battery immediately:
+In Audit Lane, persist the battery immediately:
 
 ```text
 ~/.dojo/<repo-slug>/<skill>/
@@ -119,6 +178,9 @@ Persist the battery immediately:
   <skill>-runs/
   <skill>-record.md
 ```
+
+In Fast Lane, open the lightweight record from `references/packaging.md`
+instead; do not create empty scenario and run trees.
 
 Require a candidate skill directory before creating the evidence identity. For
 an idea-only request, choose or create the intended candidate directory first.
@@ -193,6 +255,10 @@ skill shape or criterion.
 
 ### 5. Graduation
 
+Fast Lane does not run formal graduation. It runs the fresh different-in-kind
+check in `lanes.md` and can finish only with a Fast Lane outcome. The procedure
+below is Audit Lane.
+
 Freeze the candidate, record its content digest as the candidate revision, and
 open a new graduation-attempt identifier. Only then have a separate holdout custodian materialize
 the predeclared coverage cells into concrete tasks and criteria without seeing
@@ -220,7 +286,7 @@ Validate the installed skill folder against the Agent Skills format and the
 target host. Smoke-invoke it from a clean context. Leak-check every curated
 artifact before copying it into a repository.
 
-End every candidate revision with exactly one verdict: `GRADUATED`,
+End every Audit Lane candidate revision with exactly one verdict: `GRADUATED`,
 `NOT GRADUATED`, or `UNPROVEN`, scoped to its latest graduation attempt. Use
 `GRADUATED` only when every applicable gate for that revision and attempt
 passes with valid evidence and the record demonstrates a bounded value claim.
@@ -230,12 +296,17 @@ older failures and burned attempts as history, but do not count replaced
 evidence against a later revision. Known limitations may narrow the claim;
 they never waive a current gate.
 
+Fast Lane instead records exactly one of `FAST-LANE PASS`, `FAST-LANE FAIL`,
+or `UNPROVEN` using the compact receipt contract.
+
 Keep raw runtime evidence under `~/.dojo/`. Copy a curated record or fixtures
 into a repository only when the user wants checked-in proof. Read
 `references/packaging.md` for the ship checklist and record template.
 
 ## Run Rules
 
+- Record the requested selector, selected lane, selection reason, and skill
+  tier before the first run.
 - Use a fresh context per test run and label its actual isolation grade.
 - Give every runner an exact read/write capability envelope.
 - Keep criteria, expected answers, sibling fixtures, prior runs, and holdouts
@@ -247,8 +318,12 @@ into a repository only when the user wants checked-in proof. Read
 - Ask runners for raw steps and outputs, not a polished user summary.
 - Record exact prompts, tool/file traces when available, inspected paths,
   model, host, active skill catalog, network policy, and isolation grade.
-- Treat the inspected path or tool audit as the evidence that the declared
-  boundary held.
+- In Audit Lane, treat the inspected path or tool audit as the evidence that
+  the declared boundary held. Fast Lane runner self-report is not that audit.
+- In Fast Lane, use the compact no-spelunk prompt from `references/lanes.md`,
+  keep the claim at fresh-context confidence, and never emit `GRADUATED`.
+- In Audit Lane, retain v0.2 graduation semantics. Use portable manifests and
+  canonical events only when the complexity triggers above apply.
 
 ## Do Not Use Dojo For
 
@@ -259,8 +334,12 @@ into a repository only when the user wants checked-in proof. Read
 
 ## References
 
+- [`references/lanes.md`](references/lanes.md) — read first; defines lane
+  selection, flags, overview, Fast Lane, Audit Lane, and automation behavior.
 - [`references/isolation.md`](references/isolation.md) — read before every
   behavioral run.
+- [`references/harness-contracts.md`](references/harness-contracts.md) — read
+  only for a triggered portable Audit Lane package.
 - [`references/pressure-testing.md`](references/pressure-testing.md) — read for
   kata 1, 2, and 4.
 - [`references/reference-correctness.md`](references/reference-correctness.md)

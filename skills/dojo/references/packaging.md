@@ -45,6 +45,8 @@ Before release:
    applicable. Otherwise record the exact skip rationale.
 8. Verify the record distinguishes audited instruction-bounded,
    fresh-context-only, and degraded evidence without upgrading the claim.
+9. Verify the requested selector and normalized lane are recorded, and that a
+   Fast Lane record does not claim graduation.
 
 ## Runtime Evidence
 
@@ -72,7 +74,28 @@ Repository root: <normalized absolute root>
 Root resolution: <git|declared-project|candidate-fallback>
 Repository slug: <resolved slug, including collision suffix when present>
 Candidate skill path: <normalized absolute path>
+Lane selector: <auto|fast|audit|fast-alias|audit-alias>
+Lane selected: <fast|audit>
 ```
+
+## Fast Lane Receipt
+
+Fast Lane keeps one small record rather than materializing the full Audit Lane
+governance tree. Preserve:
+
+- request and candidate path;
+- lane selector, selected lane, reason, and skill tier;
+- changed or new claim plus prewritten observable checks;
+- exact runner prompts and results, including reported inspected paths;
+- counterfactual used or concrete reason it was skipped;
+- bounded edits and affected reruns;
+- fresh different-in-kind check for new or materially changed behavior;
+- trigger result when routing changed and the applicable package result;
+- limitations and exactly one result: `FAST-LANE PASS`, `FAST-LANE FAIL`, or
+  `UNPROVEN`.
+
+The compact record may live at `<skill>-record.md`; mark non-applicable Audit
+Lane sections as omitted by lane rather than manufacturing empty tables.
 
 ## Candidate Freeze Identity
 
@@ -106,6 +129,8 @@ Repository root: <normalized absolute root>
 Root resolution: <git|declared-project|candidate-fallback>
 Repository slug: <resolved slug>
 Candidate skill path: <normalized absolute path>
+Lane selector: <auto|fast|audit|fast-alias|audit-alias>
+Lane selected: audit
 
 *Tier: <discipline|technique|reference> · <date> · <host/model> · isolation: <grade>*
 
