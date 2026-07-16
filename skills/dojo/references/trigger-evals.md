@@ -5,7 +5,12 @@ the right work and stays out of adjacent work.
 
 ## Matrix
 
-Create 10–15 prompts:
+Start with 10–15 prompts. Expand when needed so every declared mode, explicit
+exclusion, and credible neighboring skill owner appears at least once. A broad
+multi-mode skill does not inherit the same routing budget as a narrow command
+reference.
+
+Use approximately:
 
 - About 60% should-trigger positives, using real user language, slang, partial
   phrasing, and explicit invocations.
@@ -21,7 +26,7 @@ Use the active host's actual skill catalog when available. Preserve the exact
 `name: description` snapshot, host, and date. Do not silently substitute every
 skill found in caches or inactive directories.
 
-Prefer exercising the real dispatcher. When that is inaccessible, use two
+Prefer exercising the real dispatcher. When that is unavailable, use two
 fresh routing judges as an explicit proxy and give each the complete active
 description list.
 

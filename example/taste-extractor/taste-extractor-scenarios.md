@@ -4,15 +4,18 @@ Repository root: <repository-root>
 Root resolution: git
 Repository slug: dojo
 
-Date: 2026-07-15  
-Host: isolated agent contexts  
-Model identifier: not exposed by host  
-Isolation: one fresh context per behavior run  
+Date: 2026-07-15
+Host: fresh agent contexts
+Model identifier: not exposed by host
+Isolation: v1 fresh-context only; prompt boundary without a v0.2 canary or complete trace
 Tier: technique
 
+> **v0.2 evidence classification:** historical `fresh-context only`, not
+> retroactively audited instruction-bounded evidence.
+
 Criteria were written before any behavior run. Training scenarios may inform
-bounded edits. Holdouts are designed separately, remain sealed during
-iteration, and are run once after the candidate is frozen.
+bounded edits. Holdouts were kept outside the authoring loop, then run once
+after the candidate was frozen.
 
 ## Claim
 
@@ -68,7 +71,7 @@ Observable criteria:
 Expected baseline weakness: literal beige-and-clay styling without a defensible
 translation from physical craft to interface behavior.
 
-## T4 — Inaccessible source
+## T4 — Unavailable source
 
 Archetype: degraded dependency handling.
 
@@ -84,9 +87,9 @@ desired output.
 
 ## Heldouts
 
-Two holdouts are stored in `taste-extractor-runs/holdouts/sealed-holdouts.md`.
-They were designed by an isolated context and must not be opened until the
-candidate skill is frozen after the training runs. Sealed SHA-256:
+Two holdouts are stored in `taste-extractor-runs/holdouts/held-out-custody.md`.
+They were designed in a fresh context and must not be opened until the
+candidate skill is frozen after the training runs. Custody SHA-256:
 `337f6c7fcfce50f17dedf8dc1b3bbb787ffa82b8f4deb63b21a1d9223db2cd3e`.
 
 ## Result ledger

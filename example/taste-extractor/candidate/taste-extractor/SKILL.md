@@ -121,7 +121,7 @@ Before delivery, verify:
 - invariants and adaptable choices are both explicit;
 - cross-medium mappings explain function rather than decoration;
 - the handoff contains rules, freedoms, anti-patterns, and yes/no checks;
-- an inaccessible source produced an intake request, not invented taste.
+- an unavailable source produced an intake request, not invented taste.
 
 ## Final Report
 

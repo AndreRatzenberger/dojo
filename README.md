@@ -4,7 +4,8 @@
 
 <p align="center">
   <a href="https://agentskills.io"><img src="https://img.shields.io/badge/Agent%20Skill-open%20format-43d9ad.svg" alt="Open Agent Skill"></a>
-  <a href="evidence/dojo-record.md"><img src="https://img.shields.io/badge/evidence-curated%20record-f0a54b.svg" alt="Curated evidence record"></a>
+  <a href="evidence/dojo-v0.2-self-test.md"><img src="https://img.shields.io/badge/self--test-APPROVED-43d9ad.svg" alt="Self-test approved"></a>
+  <a href="evidence/dojo-v0.2-change-record.md"><img src="https://img.shields.io/badge/evidence-curated%20record-f0a54b.svg" alt="Curated evidence record"></a>
   <a href="skills/dojo/SKILL.md"><img src="https://img.shields.io/badge/output-~%2F.dojo-9b7bff.svg" alt="Output under ~/.dojo"></a>
   <a href="LICENSE"><img src="https://img.shields.io/badge/License-MIT-yellow.svg" alt="License: MIT"></a>
 </p>
@@ -17,12 +18,35 @@
 
 A rough idea can enter in a white belt. Dojo first watches the untrained agent,
 then writes the smallest useful technique, spars against the failure, and keeps
-training until the skill is ready for sealed graduation. An existing skill can
+training until the skill is ready for held-out graduation. An existing skill can
 walk onto the same mat for hardening.
 
 Dojo awards no belts for beautiful prose. A skill earns trust only through the
 rigor appropriate to its tier, and every stumble, burned holdout, and surviving
 fix leaves a receipt.
+
+## Dojo Put Itself On The Mat
+
+**Release status: APPROVED.** Dojo compared its released contract with the new
+candidate, tested the changed behavior under pressure, and made contamination
+handling survive unseen cases.
+
+| Self-test result | Score |
+|---|---:|
+| Released behaviors corrected | **7** |
+| Strong released defaults preserved | **2** |
+| Time, sunk-cost, and authority pressure variants | **3/3 at 5/5** |
+| Audited capability-envelope calibrations | **5/5 boundaries held** |
+| Current-contract boundary proof | **3/3 boundaries held** |
+| Unseen evidence-integrity decisions | **3/3 satisfy the current five checks** |
+| Contaminated runs counted as evidence | **0** |
+
+The unseen evidence-integrity case mixed two clean trials with one scorer-
+contaminated trial. Every independent runner preserved the clean observations,
+marked the contaminated trial `INVALID`, required a fresh replacement, and
+withheld graduation until the missing evidence exists. That is the behavior
+Dojo exists to produce. Read the complete curated receipt in
+[`evidence/dojo-v0.2-self-test.md`](evidence/dojo-v0.2-self-test.md).
 
 ---
 
@@ -35,16 +59,16 @@ npx skills add AndreRatzenberger/dojo
 ```
 
 The CLI detects supported agents and asks where to install the skill. Add `-g`
-for a user-level installation. While this repository is private, GitHub access
-to it is required.
+for a user-level installation.
 
 ---
 
 ## Enter The Dojo
 
-Graduation-grade evidence requires a host that can launch fresh subagents or
-separate clean sessions. Without either, Dojo performs degraded static review
-and must not claim baseline, pressure, or graduation evidence.
+Graduation-grade evidence requires a fresh context and an audited information
+boundary: exact allowed roots, a canary preflight, and an inspected path or tool
+audit. A fresh agent without that boundary may provide exploratory feedback,
+but not clean baseline or graduation proof.
 
 ```text
 Use $dojo to prove this skill changes behavior before we publish it.
@@ -72,15 +96,18 @@ explains why this particular skill deserves to exist.
 | Receipt | What It Means |
 |---|---|
 | Original request | The exact job the student entered the dojo to learn. |
-| Scenario ledger | Claims, tier, and observable checks written before seeing results. |
+| Coverage ledger | The modes, archetypes, state transitions, dependencies, and risk boundaries the claim actually spans. |
+| Scenario ledger | Observable checks and trial counts written before seeing results. |
+| Isolation manifest | Allowed roots, candidate visibility, active skill catalog, network policy, canary result, trace availability, and evidence grade. |
 | Baseline prompts, outputs, and scores | What an untrained agent already did well—and where it actually fell. |
 | Candidate and authoring notes | The smallest technique chosen to answer an observed failure. |
 | Skilled runs | Whether the technique fixed that failure without making strong defaults worse. |
 | Freeze digest | The exact candidate that entered graduation; no mid-bout coaching allowed. |
-| Sealed holdouts | One-shot tests of transfer beyond the training examples. A failed one is burned. |
+| Held-out trials | Predeclared coverage cells materialized by a separate custodian only after freeze. A failed or exposed holdout is burned. |
+| Invalid-run ledger | Contamination and harness failures that contribute no score but remain visible. |
 | Routing judges | Evidence that the skill enters its own bouts and leaves neighboring skills alone. |
 | Package checks and smoke run | Proof that the installable folder is valid, discoverable, and usable cold. |
-| Final Dojo record | The honest roll-up: wins, failures, loopholes, limitations, and graduation result. |
+| Final Dojo record | The honest roll-up: wins, failures, loopholes, limitations, and one terminal verdict. |
 
 Raw evidence normally lives under `~/.dojo/`. A checked-in example must first
 replace machine paths and runner identities with neutral placeholders. The
@@ -95,12 +122,17 @@ The example began with this request:
 > With Dojo, create a skill that extracts “taste” out of any medium so other
 > agents can produce entities of that medium in the same style.
 
-That sentence became a complete technique-tier run in
+That sentence became a complete historical technique-tier run in
 [`example/taste-extractor/`](example/taste-extractor/). The baselines were
 awkward in the most useful way: three already passed. Dojo did not manufacture
 problems to look busy. The prose case scored 4/5 because its principles lacked
 a source-by-source evidence trace; the candidate added a mandatory Taste Trace
 and brought that case to 5/5 while preserving the others.
+
+> **Evidence classification:** this v1 campaign used fresh contexts and
+> prompt-level file restrictions, but predates the v0.2 canary preflight and
+> path/tool-trace contract. Dojo preserves it as useful historical evidence and
+> classifies it as `fresh-context only` rather than retroactively audited proof.
 
 | Stage | Receipt | What Happened |
 |---|---|---|
@@ -108,14 +140,14 @@ and brought that case to 5/5 while preserving the others.
 | Precommitment | [`taste-extractor-scenarios.md`](example/taste-extractor/taste-extractor-scenarios.md) | Defines four training cases and their checks before any run. |
 | Baseline | [`t1-interface/`](example/taste-extractor/taste-extractor-runs/t1-interface/), [`t2-prose/`](example/taste-extractor/taste-extractor-runs/t2-prose/), [`t3-cross-medium/`](example/taste-extractor/taste-extractor-runs/t3-cross-medium/), [`t4-missing-source/`](example/taste-extractor/taste-extractor-runs/t4-missing-source/) | Keeps every raw prompt, raw output, and criterion-level score before and after training. |
 | Write | [`authoring-notes.md`](example/taste-extractor/candidate/authoring-notes.md) and [`SKILL.md`](example/taste-extractor/candidate/taste-extractor/SKILL.md) | Shows why the Taste Trace was the smallest justified instruction. |
-| Freeze | [`FROZEN.md`](example/taste-extractor/candidate/FROZEN.md) | Seals the candidate tree before either holdout is opened. |
-| Graduation | [`sealed-holdouts.md`](example/taste-extractor/taste-extractor-runs/holdouts/sealed-holdouts.md), [`holdout-1-score.md`](example/taste-extractor/taste-extractor-runs/holdouts/holdout-1-score.md), [`holdout-2-score.md`](example/taste-extractor/taste-extractor-runs/holdouts/holdout-2-score.md) | Transfers choreography into a decision protocol and a field-guide system into an IVR; both pass 5/5 once. |
-| Routing | [`matrix.md`](example/taste-extractor/taste-extractor-runs/routing/matrix.md), [`judge-1.md`](example/taste-extractor/taste-extractor-runs/routing/judge-1.md), [`judge-2.md`](example/taste-extractor/taste-extractor-runs/routing/judge-2.md), [`routing-score.md`](example/taste-extractor/taste-extractor-runs/routing/routing-score.md) | Two isolated proxy judges match all 15 declared owners: 30/30 decisions. |
+| Freeze | [`FROZEN.md`](example/taste-extractor/candidate/FROZEN.md) | Freezes the candidate tree before either holdout is opened. |
+| Graduation | [`held-out-custody.md`](example/taste-extractor/taste-extractor-runs/holdouts/held-out-custody.md), [`holdout-1-score.md`](example/taste-extractor/taste-extractor-runs/holdouts/holdout-1-score.md), [`holdout-2-score.md`](example/taste-extractor/taste-extractor-runs/holdouts/holdout-2-score.md) | Both historical held-outs passed 5/5 once under the v1 fresh-context protocol; v0.2 does not retroactively upgrade them. |
+| Routing | [`matrix.md`](example/taste-extractor/taste-extractor-runs/routing/matrix.md), [`judge-1.md`](example/taste-extractor/taste-extractor-runs/routing/judge-1.md), [`judge-2.md`](example/taste-extractor/taste-extractor-runs/routing/judge-2.md), [`routing-score.md`](example/taste-extractor/taste-extractor-runs/routing/routing-score.md) | Two fresh-context proxy judges match all 15 declared owners: 30/30 decisions. |
 | Package | [`package-checks.md`](example/taste-extractor/taste-extractor-runs/package/package-checks.md), [`smoke-output.md`](example/taste-extractor/taste-extractor-runs/package/smoke-output.md), [`smoke-score.md`](example/taste-extractor/taste-extractor-runs/package/smoke-score.md) | Validates the folder, discovers exactly one skill, and invokes it cold. |
 | Record | [`taste-extractor-record.md`](example/taste-extractor/taste-extractor-record.md) | Rolls up the evidence and keeps the limitations visible. |
 
 The result is not just a taste-extractor skill. It is the skill plus the
-training tape, scorecards, sealed bouts, routing drill, equipment check, and
+training tape, scorecards, held-out bouts, routing drill, equipment check, and
 the note saying exactly where the black belt still does **not** apply.
 
 ---
@@ -132,7 +164,7 @@ where the creation loop stops and what evidence survives it.
 | Starting point | An idea, task, or existing draft | An idea, task, existing draft, or released skill |
 | Creation method | Apply authoring patterns, examples, and structural guidance | Observe untrained behavior, then write the smallest technique justified by the failure |
 | Iteration | Improve the skill until its instructions look and feel ready | Preserve raw attempts, make bounded edits, and rerun the affected bout |
-| Quality checks | Structure, clarity, examples, and authoring conventions | Those checks plus baselines, regression runs, sealed holdouts, routing, and package smoke |
+| Quality checks | Structure, clarity, examples, and authoring conventions | Those checks plus baselines, regression runs, held-out trials, routing, and package smoke |
 | Receipts | Often the finished skill and perhaps examples | Prompts, outputs, scores, freeze, holdouts, judges, package checks, and final record |
 | Finish line | A well-formed, useful skill | A useful skill with tier-appropriate evidence for what it can—and cannot—claim |
 
@@ -149,7 +181,7 @@ graduation bout around long enough to show how the student earned the belt.
 | Baseline | Let the untrained version onto the mat. Where does it fall? |
 | Write | Teach the smallest technique that answers the observed failure. |
 | Pressure | Spar against shortcuts, rationalization, time, sunk cost, and authority. |
-| Graduation | Face sealed opponents once. A failed holdout is burned, not rehearsed. |
+| Graduation | Freeze first; then a separate custodian materializes held-out opponents for the predeclared trials. A failed holdout is burned, not rehearsed. |
 | Trigger eval | Enter the right bouts without stealing a neighboring skill's match. |
 | Package | Fold the gi, check the bag, and leave a clean evidence record. |
 
@@ -166,11 +198,27 @@ authority pressure runs. Narrow edits rerun only the affected gate.
 
 ## Isolation Matters
 
-The strongest run uses a fresh subagent for every scenario. Separate clean
-sessions are an acceptable fallback. A same-context self-review may still find
-useful issues, but Dojo marks it as degraded and never calls it graduation.
+A fresh mind is not a locked room. A new subagent can still search sibling
+fixtures, prior runs, authoring notes, installed skill metadata, and the
+candidate itself.
 
-That boundary is important: clean-looking output is not clean evidence.
+| Grade | What the runner receives | What Dojo may claim |
+|---|---|---|
+| **Audited instruction-bounded** | A fresh context, exact read/write envelope, unique folder, canary preflight, and inspected trace/path audit | Clean baseline, pressure, and graduation evidence |
+| **Fresh-context only** | A new context without a verified information boundary | Exploratory behavior only |
+| **Degraded local** | The authoring context reviews itself | Static findings only |
+
+Capability prompting matters. In the v0.2 validation, an unbounded control
+retrieved a forbidden random canary, while five fresh instruction-bounded
+trials—including urgency and an in-file attempt to expand scope—stayed inside
+their assigned folders. A compact rerun against the current contract then held
+3/3 boundaries under parent-search, urgent-authority, and explicit broad-search
+pressure. The result validates capability envelopes as Dojo's portable audited
+boundary. See
+[`evidence/isolation-validation.md`](evidence/isolation-validation.md).
+
+Every behavioral run is `PASS`, `FAIL`, or `INVALID`. Contamination is invalid
+evidence, not a known limitation attached after graduation.
 
 ---
 
@@ -190,13 +238,15 @@ letters, digits, and hyphens. A short path hash disambiguates collisions. For
 example, a `csv-tools` repository testing `csv-import` writes under
 `~/.dojo/csv-tools/csv-import/`.
 
-Dojo resolves the repository root with Git when available and otherwise uses
-the current working directory, recording the fallback. It canonicalizes that
-root by resolving symlinks and dot segments, using an absolute path with `/`
-separators, and lowercasing only a Windows drive letter. The collision suffix
-starts with the first eight lowercase hex characters of SHA-256 over that UTF-8
-string and extends four characters at a time if needed. An ownership mismatch
-at the full digest fails closed rather than sharing evidence.
+Dojo resolves the repository root from the candidate skill directory with Git.
+For a non-Git candidate it uses an explicitly declared containing project, or
+the candidate directory itself—not the agent's ambient working directory. It
+canonicalizes that root by resolving symlinks and dot segments, using an
+absolute path with `/` separators, and lowercasing only a Windows drive letter.
+The collision suffix starts with the first eight lowercase hex characters of
+SHA-256 over that UTF-8 string and extends four characters at a time if needed.
+An ownership mismatch at the full digest fails closed rather than sharing
+evidence.
 
 Raw prompts and outputs may contain sensitive task material. Dojo does not
 upload or automatically expire them. Review the directory before sharing it;
@@ -206,12 +256,17 @@ operating system account and umask. The host may send prompts, source material,
 and outputs to one or more model contexts; provider handling and retention are
 governed by the host, not Dojo.
 
-Only a curated, leak-checked record belongs in a public repository. This repo's
-promotion record is in [`evidence/dojo-record.md`](evidence/dojo-record.md),
-with curated scenarios and routing summaries in
-[`evidence/eval-fixtures.md`](evidence/eval-fixtures.md). Raw outputs remain
-local, so the checked-in evidence is a curated run record rather than a signed
-transcript.
+Only a curated, leak-checked record belongs in a public repository. The v0.2
+targeted validation is in
+[`evidence/dojo-v0.2-change-record.md`](evidence/dojo-v0.2-change-record.md),
+with its canary experiment in
+[`evidence/isolation-validation.md`](evidence/isolation-validation.md). The
+historical promotion summary remains in
+[`evidence/dojo-record.md`](evidence/dojo-record.md), with curated scenarios and
+routing expectations in [`evidence/eval-fixtures.md`](evidence/eval-fixtures.md).
+Raw outputs remain local. Those v1 runs predate the v0.2 isolation grades and
+are classified as fresh-context-only evidence rather than retroactively claimed
+as audited transcripts.
 
 The reported counts are curator-attested summaries, not independently
 reproducible benchmark results. The fixtures disclose the prompts, checks, and
@@ -239,7 +294,7 @@ behavior has survived contact with reality.”
 
 ```text
 skills/dojo/       installable Agent Skill
-evidence/          curated graduation record
+evidence/          curated evidence and validation records
 example/           sanitized, receipt-complete worked example
 docs/assets/       repository artwork
 ```
@@ -249,3 +304,24 @@ docs/assets/       repository artwork
 ## License
 
 MIT © 2026 Andre Ratzenberger
+
+---
+
+## Changelog
+
+### 0.2.0 — 2026-07-16
+
+- Added audited instruction-bounded, fresh-context-only, and degraded evidence
+  grades.
+- Added run capsules, capability envelopes, canary preflights, path/tool
+  audits, and the `INVALID` contamination state.
+- Replaced the fixed behavior battery with coverage- and risk-scaled scenario
+  and trial budgets.
+- Separated candidate authoring from post-freeze holdout custody and added
+  deterministic tier, narrow-edit, reference-review, and release verdict rules.
+- Self-tested the contract against its released version, preserved two strong
+  defaults, corrected seven gaps, passed all three pressure variants, and
+  rejected contaminated evidence in unseen trials.
+- Reclassified the original checked-in campaigns as historical v1 evidence.
+
+See [`CHANGELOG.md`](CHANGELOG.md) for the complete release history.

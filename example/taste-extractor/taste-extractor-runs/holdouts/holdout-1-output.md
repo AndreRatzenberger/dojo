@@ -205,7 +205,7 @@ If the question, owner, authority, options, or minimum evidence is missing, do n
 ## Roles
 
 - **Decision owner:** makes and owns the final status. Must not facilitate.
-- **Facilitator:** enforces the sequence, response syntax, silence, and time boundaries. Does not advocate an option while facilitating.
+- **Facilitator:** keeps the sequence, response syntax, silence, and time boundaries. Does not advocate an option while facilitating.
 - **Recorder:** maintains the single shared record and preserves before/after revisions. May be combined with facilitator for a five-person meeting.
 - **Context proposer:** states the initial proposition and evidence. May also be the decision owner if authority genuinely overlaps, but receives no extra discussion privileges.
 - **Architecture participants:** supply relevant evidence and analysis across the applicable quality dimensions.
@@ -327,7 +327,7 @@ REVIEW OR REVERSAL TRIGGER
 
 **Facilitator action**
 
-1. The challenge lead gives a maximum 60-second failure case against the current leading option. It must be plausible for this architecture and grounded in available evidence or explicitly labeled assumptions. Examples of relevant categories include dependency failure, migration rollback, security boundary, data integrity, operability, latency, cost, or ownership loss; use only what fits.
+1. The challenge lead gives a maximum 60-second failure case against the current leading option. It must be plausible for this architecture and grounded in available evidence or explicitly labeled assumptions. Examples of relevant categories include dependency failure, migration rollback, access-control boundary, data integrity, operability, latency, cost, or ownership loss; use only what fits.
 2. The option’s strongest advocate gets 60 seconds to identify which assumption, constraint interpretation, or mechanism failed. Defense without diagnosis is stopped.
 3. Participants spend two silent minutes revising the option, criterion, recovery plan, or status. The recorder preserves the prior text using revision history or strikethrough.
 4. The facilitator reads the before state, the break, the revision, and the residual risk. The decision owner confirms whether the leading option changed.

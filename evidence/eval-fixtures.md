@@ -5,6 +5,11 @@ the curated standalone record. Each behavior case ran in a fresh context. The
 runner saw the candidate skill only for skilled cases and never saw criteria,
 prior outputs, or expected answers.
 
+> **v0.2 evidence classification:** historical `fresh-context only`. The
+> runner boundary was instruction-level and did not include the current canary
+> preflight or required path/tool audit, so these fixtures are not retroactive
+> audited evidence.
+
 ## Training comparisons
 
 ### No isolation

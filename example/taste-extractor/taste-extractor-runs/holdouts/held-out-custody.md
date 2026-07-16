@@ -1,8 +1,8 @@
-# Sealed holdouts — `taste-extractor`
+# Held-out custody — `taste-extractor`
 
-These scenarios are sealed until the candidate skill is frozen. Run each once
-in a fresh context. Supply the runner prompt verbatim and do not provide any
-other source material.
+These scenarios are kept held out until the candidate skill is frozen. Run
+each once in a fresh context. Supply the runner prompt verbatim and do not
+provide any other source material.
 
 ## Holdout 1 — Choreography to decision protocol
 

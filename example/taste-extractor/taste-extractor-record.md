@@ -1,10 +1,15 @@
 # Dojo record — taste-extractor
 
-*Tier: technique · 2026-07-15 · isolated agent contexts / model identifier not exposed*
+*Tier: technique · 2026-07-15 · v1 fresh-context protocol / model identifier not exposed*
 
 Repository root: <repository-root>
 Root resolution: git
 Repository slug: dojo
+
+> **v0.2 evidence classification:** historical `fresh-context only`. These
+> receipts predate canary preflights and complete path/tool traces. They remain
+> useful behavioral evidence, but are not retroactively classified as audited
+> instruction-bounded evidence.
 
 ## Claim
 
@@ -21,7 +26,7 @@ requests appropriate evidence instead of inventing a profile.
 | Interface to interface | No observed failure: 5/5 before training. |
 | Prose to onboarding microcopy | 4/5: principles were not traced one by one to concrete source evidence. |
 | Ceramics to status page | No observed failure: 5/5 before training. |
-| Inaccessible source | No observed failure: safe refusal passed 4/4 before training. |
+| Unavailable source | No observed failure: safe refusal passed 4/4 before training. |
 
 ## Loopholes closed
 
@@ -42,7 +47,7 @@ requests appropriate evidence instead of inventing a profile.
 | Interface to interface | 5/5 | 5/5 | preserved |
 | Prose to onboarding microcopy | 4/5 | 5/5 | corrected |
 | Ceramics to status page | 5/5 | 5/5 | preserved |
-| Inaccessible source | 4/4 | 4/4 | preserved |
+| Unavailable source | 4/4 | 4/4 | preserved |
 
 ## Pressure testing
 
@@ -78,7 +83,7 @@ judges matched all 15 rows: 30/30 decisions correct.
 | 4 | Turn music-video observations into a launch-film motion grammar. | taste-extractor | taste-extractor (2/2) | yes |
 | 5 | Distill a synth track into a game-audio production handoff. | taste-extractor | taste-extractor (2/2) | yes |
 | 6 | Translate a service ritual into a new app flow. | taste-extractor | taste-extractor (2/2) | yes |
-| 7 | Use the skill on an inaccessible link and request evidence if needed. | taste-extractor | taste-extractor (2/2) | yes |
+| 7 | Use the skill on an unavailable link and request evidence if needed. | taste-extractor | taste-extractor (2/2) | yes |
 | 8 | Build an evidence-traced style profile from product photos. | taste-extractor | taste-extractor (2/2) | yes |
 | 9 | Extract invariants and variables across packaging variants. | taste-extractor | taste-extractor (2/2) | yes |
 | 10 | Create an Agent Skill for reconciling CSV schemas. | skill-creator | skill-creator (2/2) | yes |
@@ -101,6 +106,9 @@ judges matched all 15 rows: 30/30 decisions correct.
 
 ## Known limitations
 
+- This is a pre-v0.2 record. Fresh contexts were used, but no canary preflight
+  or complete path/tool trace proves that each runner stayed inside its stated
+  evidence capsule.
 - The evaluation represents media through supplied evidence packets. It does
   not yet prove direct inspection across image, audio, video, or physical
   artifact tooling.
@@ -108,7 +116,7 @@ judges matched all 15 rows: 30/30 decisions correct.
   is specifically the prose trace from 4/5 to 5/5; the other runs demonstrate
   preservation and generalization, not a claim that every useful behavior came
   only from the skill.
-- Routing used two isolated proxy judges, not a production dispatcher.
+- Routing used two fresh-context proxy judges, not a production dispatcher.
 - The candidate was evaluated as the environment's taste-extraction
   capability, not installed alongside another same-purpose skill.
 - A finite scenario set cannot exhaust the phrase “any medium.” Unknown source

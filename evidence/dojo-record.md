@@ -1,9 +1,14 @@
 # Dojo standalone evidence record
 
-*2026-07-15 · technique tier · fresh isolated behavior runs*
+*2026-07-15 · technique tier · v1 fresh-context behavior runs*
 
 This is a curator-attested run summary, not an independently reproducible
 benchmark transcript.
+
+> **v0.2 evidence classification:** historical `fresh-context only`. These
+> runs predate capability-envelope canaries, required path/tool audits, and the
+> current audited boundary. Preserve their findings, but do not reinterpret
+> them as audited graduation.
 
 ## Claim
 
@@ -62,7 +67,7 @@ closed rather than merging at a full-digest mismatch.
 
 ## Trigger evaluation
 
-Two fresh proxy judges received the same isolated 16-skill catalog and 15-row
+Two fresh proxy judges received the same 16-skill catalog and 15-row
 matrix: nine Dojo positives and six near-miss requests owned by skill creation,
 installation, plugin creation, code review, James, and product documentation.
 
@@ -85,7 +90,10 @@ This is proxy evidence, not a real-dispatcher result.
 Raw prompts, outputs, and the burned hold-outs stay outside the repository under
 `~/.dojo/`. This curated record contains only the release-relevant results.
 
-## Known limitation
+## Known limitations
 
-The target host did not expose a callable real dispatcher during this run. No
-portability claim is made beyond the validated Agent Skills package structure.
+- Isolation used fresh agent contexts without a v0.2 canary preflight or
+  required path audit. Under the current model this is exploratory historical
+  evidence, not clean RED or graduation proof.
+- The target host did not expose a callable real dispatcher during this run. No
+  portability claim is made beyond the validated Agent Skills package structure.

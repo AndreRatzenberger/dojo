@@ -15,7 +15,7 @@ Frozen tree digest:
 ```
 
 The original graduation command included local absolute filenames in the
-concatenated `sha256sum` lines. That digest seals the local run, but it is not
+concatenated `sha256sum` lines. That digest pins the local run, but it is not
 relocation-stable. The skill files also have these path-independent hashes:
 
 ```text
