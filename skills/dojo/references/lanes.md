@@ -52,8 +52,12 @@ Audit Lane. If the requested lane cannot support the requested claim, say so:
   does not quietly become Fast Lane.
 
 `--quiet` is for automation and exact-output harnesses. It suppresses the
-conversational overview and progress ticker. It does not suppress the lane,
-tier, selected kata, evidence label, or verdict in persisted records.
+conversational overview, progress updates, and browser workbench. It does not
+suppress the lane, tier, selected kata, evidence label, or verdict in persisted
+records.
+
+`--no-workbench` suppresses only the browser surface. It does not change the
+lane or remove checks. Neither flag is an argument to a `dojo` shell command.
 
 ## Default Overview
 

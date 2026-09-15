@@ -1,4 +1,4 @@
 interface:
   display_name: "Dojo"
-  short_description: "Prove Agent Skills work before they ship"
-  default_prompt: "Use $dojo --lane auto to test and harden this Agent Skill with observable evidence."
+  short_description: "Build, compare, and refine Agent Skills"
+  default_prompt: "Use $dojo --lane auto to create or improve this Agent Skill with native authoring, visible comparisons, and feedback."

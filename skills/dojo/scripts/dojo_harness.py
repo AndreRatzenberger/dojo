@@ -17,6 +17,7 @@ from datetime import datetime
 from pathlib import Path, PurePosixPath
 from typing import Any, Iterable
 from urllib.parse import urlparse
+from urllib.parse import unquote
 
 
 RUN_SCHEMA = "dojo.run/v1"
@@ -813,9 +814,77 @@ def emit_result(errors: list[str], warnings: list[str] | None = None) -> int:
     return 0 if not errors else 1
 
 
+def validate_skill(root: Path) -> dict[str, Any]:
+    """Validate a skill without rewriting metadata or requiring a creator."""
+    root = root.resolve()
+    errors: list[str] = []
+    warnings: list[str] = []
+    try:
+        files = regular_files(root)
+        skill = root / "SKILL.md"
+        if skill not in files:
+            raise ContractError("SKILL.md is missing")
+        text = skill.read_text(encoding="utf-8")
+    except (OSError, UnicodeError, ContractError) as exc:
+        return {"status": "FAIL", "errors": [str(exc)], "warnings": []}
+    match = re.match(r"\A---\r?\n(.*?)\r?\n---(?:\r?\n|$)(.*)\Z", text, re.S)
+    if not match:
+        return {"status": "FAIL", "errors": ["missing YAML frontmatter"], "warnings": []}
+    header, body = match.groups()
+    try:
+        import yaml
+    except ImportError:
+        # The generated two-field form works with the standard library. Other
+        # YAML stays intact and needs a real parser; absence is not invalidity.
+        simple = re.fullmatch(r"name: ([a-z0-9-]+)\r?\ndescription: (.+)", header)
+        try:
+            if not simple:
+                raise ValueError()
+            value = simple[2]
+            if value.startswith('"'):
+                description = json.loads(value)
+            elif re.fullmatch(r"'(?:[^']|'')*'", value):
+                description = value[1:-1].replace("''", "'")
+            else:
+                raise ValueError()
+            metadata = {"name": simple[1], "description": description}
+            warnings.append("Validated the native two-field subset; full YAML parser unavailable.")
+        except (ValueError, TypeError):
+            return {"status": "UNPROVEN", "errors": [], "warnings": [
+                "Full YAML parsing is unavailable. Preserve this package and use an available YAML-capable host validator."
+            ]}
+    else:
+        try:
+            metadata = yaml.safe_load(header)
+        except yaml.YAMLError as exc:
+            return {"status": "FAIL", "errors": [f"invalid YAML: {exc}"], "warnings": []}
+    if not isinstance(metadata, dict):
+        errors.append("frontmatter must be an object")
+        metadata = {}
+    name, description = metadata.get("name"), metadata.get("description")
+    if not isinstance(name, str) or not re.fullmatch(r"[a-z0-9]+(?:-[a-z0-9]+)*", name) or len(name) > 64:
+        errors.append("name must be 1–64 lowercase letters, digits, and single internal hyphens")
+    if name != root.name:
+        errors.append("name must match the skill directory")
+    if not isinstance(description, str) or not description.strip() or len(description) > 1024:
+        errors.append("description must be a non-empty string of at most 1024 characters")
+    if not body.strip():
+        errors.append("skill body is empty")
+    for raw in re.findall(r"\]\((<[^>]+>|[^\s)]+)(?:\s+[^)]*)?\)", body):
+        target = raw.strip("<>").split("#", 1)[0]
+        if not target or urlparse(target).scheme:
+            continue
+        path = (root / unquote(target)).resolve()
+        if not path.is_relative_to(root.resolve()) or not path.exists():
+            errors.append(f"missing or escaping local reference: {target}")
+    return {"status": "FAIL" if errors else "PASS", "errors": errors, "warnings": warnings}
+
+
 def build_parser() -> argparse.ArgumentParser:
     parser = argparse.ArgumentParser(description=__doc__)
     sub = parser.add_subparsers(dest="command", required=True)
+    skill = sub.add_parser("validate-skill", help="Validate a skill while preserving supported metadata.")
+    skill.add_argument("candidate", type=Path)
     run = sub.add_parser("validate-run", help="Validate a dojo.run/v1 manifest.")
     run.add_argument("manifest", type=Path)
     package = sub.add_parser("preflight-package", help="Preflight a dojo.package/v1 package.")
@@ -840,6 +909,10 @@ def build_parser() -> argparse.ArgumentParser:
 def main(argv: list[str] | None = None) -> int:
     args = build_parser().parse_args(argv)
     try:
+        if args.command == "validate-skill":
+            result = validate_skill(args.candidate)
+            print(json.dumps(result, indent=2))
+            return {"PASS": 0, "FAIL": 1, "UNPROVEN": 2}[result["status"]]
         if args.command == "validate-run":
             _, errors, warnings = validate_run_file(args.manifest)
             return emit_result(errors, warnings)

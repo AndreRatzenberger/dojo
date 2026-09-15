@@ -71,9 +71,10 @@ silently changes underneath a benchmark.
 These are arguments in the skill invocation, not a `dojo` shell executable.
 Automation sends them with the prompt or host skill call.
 
-Interactive campaigns include a compact milestone/ETA ticker. It stays out of
-final answers, runner prompts, evidence, JSON, exact-output tasks, and every
-`--quiet` invocation.
+Interactive authoring shows actual milestones, comparisons, changes, and
+feedback in a local workbench. `--no-workbench` keeps the work in chat/files;
+`--quiet` also suppresses interactive progress. No estimated progress or token
+savings are presented as measurements.
 
 Graduation-grade evidence still requires a fresh context and an audited
 information boundary: exact allowed roots, a canary preflight, and an inspected
@@ -95,6 +96,46 @@ Build this new skill through Dojo and keep two scenarios held out.
 Dojo also activates for requests such as “test this skill,” “harden this
 SKILL.md,” and “why is this skill triggering?” It deliberately does not take
 over ordinary first-draft skill creation unless Dojo is explicitly requested.
+
+---
+
+## Build And Review A Skill
+
+```text
+Use $dojo --lane fast to build a release-notes skill from these examples.
+Show me the baseline, the revised output, and what you changed.
+```
+
+Dojo now writes the skill itself. It starts from a concrete task, compares the
+baseline with the candidate, and makes bounded revisions from your feedback.
+Existing supported metadata and resources survive edits. An additional skill
+creator is optional.
+
+The coding agent opens a local workbench and shares its link. Select a case to
+compare actual output artifacts, inspect skill revisions under **Skill
+changes**, and save your review under **Your judgment**. The agent reads that
+feedback, revises the skill, and records the next run. Live updates keep your
+selection and unfinished feedback intact; reloading the tab restores drafts.
+
+The browser requires Python 3.10+ and a reachable local browser, with no
+frontend build or additional web dependencies. It binds to `127.0.0.1` and
+keeps state under `~/.dojo/`. The coding agent performs the work; the browser
+does not launch model jobs. Unsupported remote environments retain the file
+workflow. Reopen a saved session with:
+
+```bash
+python3 <installed-dojo>/scripts/dojo_workbench.py serve <session-directory> --open
+```
+
+Run states distinguish failed checks, invalid runs, and missing evidence.
+Unrecorded token usage and duration stay unknown. A successful run or “Looks
+good” review does not award Audit Lane graduation. See the
+[native authoring workflow](skills/dojo/references/authoring.md) and
+[workbench command reference](skills/dojo/references/workbench.md).
+
+![Dojo comparing outputs with a feedback editor](docs/assets/dojo-workbench.png)
+
+*Illustrative session using UI test fixtures, not a model benchmark.*
 
 ---
 
@@ -351,12 +392,32 @@ behavior has survived contact with reality.”
 skills/dojo/                         installable Agent Skill
 skills/dojo/assets/harness-template/ optional complex Audit Lane template
 skills/dojo/scripts/dojo_harness.py  portable contract validator
+skills/dojo/scripts/dojo_workbench.py local session CLI and review server
+skills/dojo/assets/workbench.html    self-contained browser UI
 evidence/                            curated evidence and validation records
 example/taste-extractor/v0.1/        historical compact campaign
 example/taste-extractor/v0.2/        audited expanded campaign
-tests/test_dojo_harness.py            focused validator regressions
+tests/                              validator, session, and browser checks
 docs/assets/                         repository artwork
 ```
+
+Run the standard-library tests and validate the installable package:
+
+```bash
+python3 -m unittest discover -s tests -v
+python3 skills/dojo/scripts/dojo_harness.py validate-skill skills/dojo
+```
+
+With `agent-browser` already installed, run the browser regression check:
+
+```bash
+python3 tests/check_workbench_browser.py
+```
+
+This exercises live updates, feedback persistence/conflicts, offline recovery,
+diffs, sandboxed previews, keyboard navigation, and desktop/mobile widths.
+The [validation record](evidence/native-authoring-workbench.md) separates these
+checks from installed-agent exercises and their evidence limits.
 
 ---
 

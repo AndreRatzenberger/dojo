@@ -1,6 +1,6 @@
 ---
 name: dojo
-description: 'Use when an Agent Skill needs behavioral evaluation, hardening, trigger tuning, isolation auditing, or evidence before release, or when the user explicitly asks to create a skill through Dojo. Runs coverage-scaled baseline and skilled scenarios, pressure-tests discipline skills, holds out graduation cases, checks routing collisions, and records proof under ~/.dojo. Responds to "dojo", "test this skill", "prove this skill works", "skill evals", "harden this SKILL.md", and "why is this skill triggering". Does not own ordinary first-draft skill creation unless Dojo is explicitly requested.'
+description: 'Create and improve Agent Skills through Dojo with native authoring, a local review workbench, and behavioral evidence. Use when the user asks to build a skill through Dojo, test or harden a SKILL.md, tune triggers, audit isolation, or prove a skill before release. Compares baseline and candidate runs, records changes and human feedback, checks routing, and scales evidence from focused checks to held-out graduation. Does not own ordinary first-draft creation unless Dojo is requested, or general coding plans and reviews.'
 ---
 
 # Dojo — Skills Earn Their Place
@@ -11,11 +11,10 @@ Treat every skill as a claim about future agent behavior. Make the claim earn
 trust through observable evidence before release. Do not ship a skill merely
 because its instructions sound convincing.
 
-Dojo is the verification layer. Reuse an installed skill creator or the host's
-normal scaffolding when useful; do not compete with it. Own evaluation,
-pressure, held-out graduation, routing checks, and the evidence record. When
-the user explicitly asks to build a skill through Dojo, run the selected lane
-end to end.
+Dojo owns native authoring, evaluation, and the feedback-to-revision loop when
+requested. Use [`references/authoring.md`](references/authoring.md) for creation
+or substantive revision; an external creator is optional, never a prerequisite.
+Run the selected lane end to end.
 For a narrow edit, use the edit-to-kata mapping below. State which kata are
 run, which are skipped, and why.
 
@@ -35,7 +34,7 @@ The canonical automation selector is `--lane auto|fast|audit`; default is
 `--audit-lane [true|false]` as aliases. Selectors are case-insensitive. More
 than one enabled selector or an unknown value is `INVALID_LANE`; do not guess.
 Explicit `fast` or `audit` is sticky: never silently switch it. `--quiet`
-suppresses the conversational overview and ticker for benchmark harnesses but
+suppresses the conversational overview, progress updates, and workbench but
 does not remove lane metadata from receipts.
 For an interactive invocation without `--quiet`, give one compact pre-run
 overview: what Fast Lane would do, what Audit Lane would additionally do, the
@@ -44,19 +43,17 @@ selected lane and reason, and the applicable versus skipped kata. Under
 
 ## User-Facing Progress
 
-While a Dojo campaign is active, end each useful interactive progress update
-with this compact ticker:
+For interactive creation or substantive revision, use the local browser in
+[`references/workbench.md`](references/workbench.md). It shows the actual phase,
+reason, baseline/candidate outputs, skill changes, and saved feedback. Record
+milestones as they happen. Do not invent percentages, ETAs, or token savings.
+The coding agent executes work; the browser is a review surface.
 
-```text
-Progress: ~<percent>% (<milestone> - <completed>/<total>, next: <next milestone>)
-ETA: ~<remaining duration | estimating | blocked on dependency>
-```
-
-Count declared campaign milestones or applicable kata, not tool calls. Update
-the estimate when the plan changes; do not fake precision and do not send a
-message solely to move the ticker. Keep these as the final two non-empty lines.
-Omit the ticker from final answers, runner prompts and outputs, evidence logs,
-JSON, exact-output tasks, and every `--quiet` invocation.
+`--no-workbench` keeps the workflow in chat/files; `--quiet` also suppresses
+interactive progress. If Python or a reachable browser is unavailable, state
+that limitation and continue with the same evidence in files. In chat, explain
+the current step, what was learned, and what comes next. Keep progress out of
+runner prompts, exact-output tasks, and persisted task outputs.
 
 ## Measurability Rule
 
@@ -239,6 +236,11 @@ failure. Name and preserve that evidence.
 Author the smallest instructions that address the observed failures. Check
 every criterion against an explicit instruction. Keep `SKILL.md` focused and
 move conditional detail into directly linked `references/` files.
+Use the native authoring reference, validate the package without flattening
+existing metadata, and snapshot before candidate runs when the workbench is
+active.
+After human feedback, make a bounded revision and rerun affected cases. A
+missing required human review stays `UNPROVEN`; silence is not acceptance.
 
 ### 4. Pressure-Test — REFACTOR
 
@@ -334,6 +336,10 @@ into a repository only when the user wants checked-in proof. Read
 
 ## References
 
+- [`references/authoring.md`](references/authoring.md) — native creation and
+  revision; read when writing or materially improving a skill.
+- [`references/workbench.md`](references/workbench.md) — live local review,
+  coordinator commands, artifact comparisons, and persistent feedback.
 - [`references/lanes.md`](references/lanes.md) — read first; defines lane
   selection, flags, overview, Fast Lane, Audit Lane, and automation behavior.
 - [`references/isolation.md`](references/isolation.md) — read before every
