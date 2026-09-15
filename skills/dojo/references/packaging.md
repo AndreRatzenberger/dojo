@@ -30,7 +30,10 @@ outside the installable skill folder.
 
 Before release:
 
-1. Parse the YAML frontmatter with a real parser or the host validator.
+1. Run `scripts/dojo_harness.py validate-skill <candidate>` from the installed
+   Dojo directory. It parses full YAML when PyYAML is available, otherwise the
+   native two-field quoted subset. `UNPROVEN` means a full parser or host
+   validator is needed; preserve existing metadata rather than flattening it.
 2. Confirm `name` matches the skill directory and contains only lowercase
    letters, digits, and hyphens.
 3. Confirm `description` is a non-empty string under 1024 characters and says

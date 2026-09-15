@@ -2,6 +2,25 @@
 
 All notable changes to Dojo are documented here.
 
+## Unreleased
+
+### Added
+
+- Native skill authoring and revision with preserved metadata and resources.
+- A local workbench for live activity, baseline/candidate outputs, skill
+  diffs, persistent feedback, and agent-readable session records.
+- Immutable run and artifact snapshots, scoped token-authenticated access,
+  stale-feedback conflict handling, and sandboxed HTML previews.
+- A non-mutating skill validator that distinguishes invalid packages from
+  YAML that the available parser cannot validate.
+
+### Changed
+
+- Interactive authoring shows actual recorded milestones instead of estimated
+  percentage/ETA tickers. `--no-workbench` retains chat/files; `--quiet` also
+  suppresses the browser. Lane selection and graduation remain separate from
+  the review UI.
+
 ## 0.3.0 — 2026-07-16
 
 ### Added

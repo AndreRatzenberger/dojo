@@ -1,0 +1,1193 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <title>Dojo · Skill workbench</title>
+    <style>
+      :root {
+        color-scheme: light;
+        --ink: #252c2a;
+        --muted: #616863;
+        --paper: #f7f6f0;
+        --line: #d9ddd4;
+        --accent: #ab3e1b;
+        --wash: #eee9df;
+        font:
+          15px/1.55 system-ui,
+          sans-serif;
+      }
+      * {
+        box-sizing: border-box;
+      }
+      body {
+        margin: 0;
+        background: var(--paper);
+        color: var(--ink);
+      }
+      button,
+      input,
+      select,
+      textarea {
+        font: inherit;
+      }
+      button,
+      select {
+        cursor: pointer;
+      }
+      button {
+        border: 1px solid var(--line);
+        border-radius: 6px;
+        padding: 0.55rem 0.85rem;
+        background: white;
+        color: var(--ink);
+      }
+      button:hover {
+        border-color: var(--accent);
+      }
+      button:disabled {
+        cursor: default;
+        opacity: 0.5;
+      }
+      :focus-visible {
+        outline: 3px solid #ca653b;
+        outline-offset: 3px;
+      }
+      a {
+        color: var(--accent);
+      }
+      [hidden] {
+        display: none !important;
+      }
+      h1,
+      h2,
+      h3,
+      p {
+        margin: 0;
+      }
+      h1 {
+        font-size: 1.8rem;
+        letter-spacing: -0.045em;
+        line-height: 1.2;
+      }
+      h2 {
+        font-size: 1.1rem;
+      }
+      h3 {
+        font-size: 1rem;
+      }
+      small,
+      .muted {
+        color: var(--muted);
+      }
+      pre {
+        font:
+          13px/1.65 ui-monospace,
+          SFMono-Regular,
+          Consolas,
+          monospace;
+        white-space: pre-wrap;
+        overflow-wrap: anywhere;
+        margin: 0;
+      }
+      label {
+        display: block;
+        font-weight: 600;
+        font-size: 0.85rem;
+      }
+      select,
+      textarea {
+        width: 100%;
+        border: 1px solid var(--line);
+        border-radius: 5px;
+        background: white;
+        color: var(--ink);
+        padding: 0.55rem;
+      }
+      textarea {
+        min-height: 115px;
+        resize: vertical;
+      }
+      select {
+        max-width: 100%;
+      }
+      .eyebrow {
+        text-transform: uppercase;
+        letter-spacing: 0.12em;
+        font-size: 0.7rem;
+        font-weight: 700;
+      }
+      .shell {
+        display: grid;
+        grid-template-columns: 240px minmax(0, 1fr);
+        min-height: 100vh;
+      }
+      .sidebar {
+        padding: 30px 20px;
+        background: #25332e;
+        color: #edf0e7;
+        display: flex;
+        flex-direction: column;
+        gap: 30px;
+      }
+      .brand {
+        font-size: 2rem;
+        font-weight: 750;
+        letter-spacing: -0.065em;
+        line-height: 1;
+      }
+      .brand span {
+        color: #f3a176;
+      }
+      .sidebar .muted {
+        color: #b5c1b8;
+      }
+      .sidebar button {
+        background: transparent;
+        color: inherit;
+        border: 1px solid transparent;
+        text-align: left;
+        width: 100%;
+        margin-top: 8px;
+        padding: 10px 12px;
+      }
+      .sidebar button[aria-current="true"] {
+        background: #364a40;
+        border-color: #708475;
+      }
+      .case-title {
+        display: block;
+      }
+      .case-meta {
+        font-size: 0.73rem;
+        color: #c2d0c7;
+        display: block;
+        margin-top: 4px;
+      }
+      .sidebar footer {
+        margin-top: auto;
+        font-size: 0.8rem;
+        border-top: 1px solid #526259;
+        padding-top: 18px;
+      }
+      .main {
+        padding: 30px clamp(20px, 4vw, 65px);
+        max-width: 1680px;
+        width: 100%;
+        margin: auto;
+      }
+      .topline {
+        display: flex;
+        justify-content: space-between;
+        gap: 16px;
+        align-items: start;
+        margin-bottom: 26px;
+      }
+      .connection {
+        font-size: 0.75rem;
+        white-space: nowrap;
+        display: flex;
+        align-items: center;
+        gap: 6px;
+      }
+      .dot {
+        width: 7px;
+        height: 7px;
+        background: #466c4c;
+        border-radius: 50%;
+      }
+      .offline .dot {
+        background: #b65a2c;
+      }
+      .intent {
+        margin-top: 10px;
+        max-width: 85ch;
+        color: var(--muted);
+        white-space: pre-wrap;
+      }
+      .activity {
+        border-block: 1px solid var(--line);
+        padding: 20px 0;
+        margin-bottom: 26px;
+      }
+      .activity-head {
+        display: flex;
+        align-items: center;
+        gap: 12px;
+      }
+      .activity-head h2 {
+        font-size: 1.1rem;
+      }
+      .activity p {
+        color: var(--muted);
+        margin-top: 6px;
+      }
+      .phases {
+        display: flex;
+        flex-wrap: wrap;
+        list-style: none;
+        gap: 8px 20px;
+        padding: 0;
+        margin: 16px 0 0;
+        font-size: 0.75rem;
+        color: var(--muted);
+      }
+      .phases [aria-current="step"] {
+        color: var(--accent);
+        font-weight: 750;
+      }
+      .tabs {
+        display: flex;
+        gap: 24px;
+        border-bottom: 1px solid var(--line);
+        margin-bottom: 24px;
+        overflow: auto;
+      }
+      .tabs button {
+        border: none;
+        border-radius: 0;
+        background: transparent;
+        padding: 10px 0;
+        white-space: nowrap;
+        border-bottom: 3px solid transparent;
+      }
+      .tabs button[aria-pressed="true"] {
+        border-bottom-color: var(--accent);
+        font-weight: 650;
+      }
+      .prompt {
+        margin: 12px 0 24px;
+        border-left: 3px solid #c8cdbc;
+        padding-left: 14px;
+      }
+      .prompt summary {
+        cursor: pointer;
+        color: var(--muted);
+        font-size: 0.85rem;
+      }
+      .prompt pre {
+        margin-top: 8px;
+      }
+      .columns {
+        display: grid;
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: 20px;
+      }
+      .run {
+        min-width: 0;
+        background: #fff;
+        border: 1px solid var(--line);
+        border-radius: 8px;
+        overflow: hidden;
+      }
+      .run-head {
+        padding: 18px;
+        border-bottom: 1px solid var(--line);
+      }
+      .run-head select {
+        margin: 8px 0 12px;
+      }
+      .run-head p {
+        margin-top: 9px;
+        font-size: 0.88rem;
+      }
+      .run-body {
+        padding: 18px;
+      }
+      .status {
+        display: inline-block;
+        border: 1px solid currentColor;
+        border-radius: 4px;
+        padding: 1px 7px;
+        font-size: 0.68rem;
+        font-weight: 700;
+        text-transform: uppercase;
+        letter-spacing: 0.05em;
+      }
+      .passed {
+        color: #356548;
+        background: #eef5ee;
+      }
+      .failed {
+        color: #a03124;
+        background: #fff0eb;
+      }
+      .invalid {
+        color: #825300;
+        background: #fff4d6;
+      }
+      .unproven {
+        color: #656574;
+        background: #f1f0f7;
+      }
+      .running {
+        color: #35658c;
+        background: #edf4fb;
+      }
+      .metrics {
+        font-size: 0.73rem;
+        color: var(--muted);
+        margin-left: 8px;
+      }
+      .checks {
+        padding-left: 18px;
+        margin: 0 0 20px;
+        font-size: 0.83rem;
+      }
+      .checks li {
+        margin: 9px 0;
+      }
+      .checks p {
+        color: var(--muted);
+        font-size: 0.78rem;
+      }
+      .files {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 6px;
+        margin: 8px 0 12px;
+      }
+      .files button {
+        font-size: 0.75rem;
+        padding: 5px 8px;
+        max-width: 100%;
+        overflow-wrap: anywhere;
+      }
+      .files button[aria-pressed="true"] {
+        border-color: var(--ink);
+        background: var(--wash);
+      }
+      .preview {
+        border: 1px solid var(--line);
+        background: #fcfcf9;
+        padding: 14px;
+        min-height: 140px;
+        max-height: 430px;
+        overflow: auto;
+        font-size: 0.85rem;
+      }
+      .preview img {
+        max-width: 100%;
+        height: auto;
+      }
+      .preview iframe {
+        width: 100%;
+        height: 360px;
+        border: 0;
+        background: white;
+      }
+      .artifact-actions {
+        margin-top: 8px;
+        font-size: 0.75rem;
+      }
+      .artifact-actions a {
+        margin-right: 12px;
+      }
+      .review {
+        margin-top: 24px;
+        background: var(--wash);
+        padding: 22px;
+        border-radius: 8px;
+      }
+      .review-top {
+        display: flex;
+        justify-content: space-between;
+        gap: 18px;
+        align-items: baseline;
+        margin-bottom: 14px;
+      }
+      .review-grid {
+        display: grid;
+        grid-template-columns: 220px minmax(0, 1fr);
+        gap: 18px;
+      }
+      .review label {
+        margin-bottom: 5px;
+      }
+      .review select {
+        margin-bottom: 14px;
+      }
+      .review-actions {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 12px;
+        align-items: center;
+        margin-top: 12px;
+      }
+      .primary {
+        color: white;
+        background: var(--ink);
+        border-color: var(--ink);
+      }
+      .error {
+        color: #92351f;
+        background: #ffefe5;
+        border: 1px solid #d9987a;
+        border-radius: 5px;
+        padding: 12px;
+        margin-bottom: 20px;
+        overflow-wrap: anywhere;
+      }
+      .empty {
+        padding: 28px 0;
+        color: var(--muted);
+      }
+      .diff-controls {
+        display: grid;
+        grid-template-columns: 1fr 1fr 2fr;
+        gap: 16px;
+        margin: 14px 0;
+      }
+      .diff {
+        background: white;
+        border: 1px solid var(--line);
+        padding: 18px;
+        overflow: auto;
+        min-height: 200px;
+      }
+      .diff span {
+        display: block;
+        white-space: pre-wrap;
+        overflow-wrap: anywhere;
+      }
+      .added {
+        color: #285634;
+        background: #eaf4e5;
+      }
+      .removed {
+        color: #943b2b;
+        background: #fdeee6;
+      }
+      .history {
+        list-style: none;
+        padding: 0;
+        margin: 0;
+      }
+      .history li {
+        border-bottom: 1px solid var(--line);
+        padding: 18px 0;
+      }
+      .history time {
+        color: var(--muted);
+        font-size: 0.75rem;
+      }
+      .history p {
+        margin-top: 5px;
+        font-size: 0.9rem;
+      }
+      .saved {
+        font-size: 0.8rem;
+        white-space: pre-wrap;
+        max-height: 160px;
+        overflow: auto;
+        margin-top: 12px;
+      }
+      @media (max-width: 1100px) {
+        .shell {
+          grid-template-columns: 205px minmax(0, 1fr);
+        }
+        .main {
+          padding: 24px;
+        }
+        .columns {
+          gap: 12px;
+        }
+        .metrics {
+          display: block;
+          margin: 6px 0 0;
+        }
+        .review-grid {
+          grid-template-columns: 180px minmax(0, 1fr);
+        }
+      }
+      @media (max-width: 760px) {
+        .shell {
+          display: block;
+        }
+        .sidebar {
+          padding: 18px 20px;
+          gap: 18px;
+        }
+        .brand {
+          font-size: 1.5rem;
+        }
+        .sidebar footer {
+          display: none;
+        }
+        #cases {
+          display: flex;
+          overflow: auto;
+          gap: 8px;
+        }
+        .sidebar button {
+          min-width: 170px;
+          margin: 0;
+        }
+        .sidebar nav > .eyebrow {
+          margin-bottom: 10px;
+        }
+        .main {
+          padding: 22px 16px;
+        }
+        .topline {
+          display: block;
+        }
+        .connection {
+          margin-top: 14px;
+        }
+        h1 {
+          font-size: 1.5rem;
+        }
+        .columns,
+        .review-grid,
+        .diff-controls {
+          grid-template-columns: 1fr;
+        }
+        .review-top {
+          display: block;
+        }
+        .review {
+          padding: 16px;
+        }
+        .tabs {
+          gap: 20px;
+        }
+        .activity-head {
+          align-items: start;
+        }
+        .metrics {
+          display: inline-block;
+          margin-left: 8px;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div class="shell">
+      <aside class="sidebar">
+        <div>
+          <div class="brand">dojo<span>.</span></div>
+          <p class="muted" style="margin-top: 8px">Skill workbench</p>
+        </div>
+        <nav aria-label="Evaluation cases">
+          <p class="eyebrow">On the mat</p>
+          <div id="cases"><p class="muted">Waiting for examples…</p></div>
+        </nav>
+        <footer>
+          The agent runs the work.<br />You inspect the evidence.
+          <p id="lane" style="margin-top: 12px"></p>
+        </footer>
+      </aside>
+      <main class="main">
+        <header class="topline">
+          <div>
+            <p class="eyebrow" style="color: var(--accent); margin-bottom: 8px">
+              Make the behavior visible
+            </p>
+            <h1 id="title">Opening your session…</h1>
+            <p class="intent" id="intent"></p>
+          </div>
+          <span id="connection" class="connection"
+            ><span class="dot"></span><span id="connection-text">Connecting</span></span
+          >
+        </header>
+        <div id="error" class="error" role="alert" hidden></div>
+        <section class="activity" aria-label="Current activity">
+          <div class="activity-head">
+            <span id="phase-status" class="status running">Working</span>
+            <h2 id="activity-message">Waiting for the agent</h2>
+          </div>
+          <p id="activity-reason">Progress appears here as the agent records it.</p>
+          <small id="activity-time"></small>
+          <ol class="phases" id="phases"></ol>
+        </section>
+        <nav class="tabs" aria-label="Workbench views">
+          <button data-tab="outputs" aria-pressed="true">Compare outputs</button
+          ><button data-tab="changes" aria-pressed="false">Skill changes</button
+          ><button data-tab="activity" aria-pressed="false">Activity</button>
+        </nav>
+        <section id="outputs-panel">
+          <h2 id="case-title">Your first example will appear here</h2>
+          <details class="prompt" id="prompt-details" hidden>
+            <summary>Task and declared checks</summary>
+            <pre id="prompt"></pre>
+          </details>
+          <div class="columns">
+            <article class="run" id="baseline"></article>
+            <article class="run" id="candidate"></article>
+          </div>
+          <section class="review" aria-labelledby="review-title">
+            <div class="review-top">
+              <h2 id="review-title">Your judgment</h2>
+              <small>Saved feedback goes back to the coding agent.</small>
+            </div>
+            <form id="review-form">
+              <div class="review-grid">
+                <div>
+                  <label for="review-run">Review a finished run</label
+                  ><select id="review-run"></select
+                  ><label for="decision">Decision</label
+                  ><select id="decision">
+                    <option value="comment">Comment</option>
+                    <option value="looks-good">Looks good</option>
+                    <option value="needs-changes">Needs changes</option>
+                  </select>
+                </div>
+                <div>
+                  <label for="comment">What works? What should change?</label
+                  ><textarea
+                    id="comment"
+                    maxlength="20000"
+                    placeholder="Be concrete — this becomes the next revision’s input."
+                  ></textarea>
+                </div>
+              </div>
+              <div class="review-actions">
+                <button class="primary" id="save" type="submit">Save feedback</button
+                ><span id="feedback-status" role="status"></span
+                ><button id="reload-feedback" type="button" hidden>
+                  Load saved feedback (discard draft)
+                </button>
+              </div>
+              <pre id="saved-feedback" class="saved" hidden></pre>
+            </form>
+          </section>
+        </section>
+        <section id="changes-panel" hidden>
+          <h2>What changed, and why</h2>
+          <p class="muted">
+            Recorded skill snapshots. These comparisons do not confer Audit Lane graduation.
+          </p>
+          <div class="diff-controls">
+            <div>
+              <label for="before">Before</label
+              ><select id="before"></select>
+            </div>
+            <div>
+              <label for="after">After</label
+              ><select id="after"></select>
+            </div>
+            <div>
+              <label for="diff-file">File</label
+              ><select id="diff-file"></select>
+            </div>
+          </div>
+          <p id="revision-reason" class="muted" style="margin-bottom: 14px"></p>
+          <pre class="diff" id="diff">Record a skill revision to inspect its files.</pre>
+        </section>
+        <section id="activity-panel" hidden>
+          <h2>Session history</h2>
+          <p class="muted">
+            Milestones recorded by the coding agent, with the reason for each step.
+          </p>
+          <ol id="history" class="history"></ol>
+        </section>
+      </main>
+    </div>
+    <script>
+      "use strict";
+      const $ = (id) => document.getElementById(id);
+      const el = (tag, text, cls) => {
+        const n = document.createElement(tag);
+        if (text !== undefined) n.textContent = text;
+        if (cls) n.className = cls;
+        return n;
+      };
+      let token = location.hash.slice(1) || sessionStorage.getItem("dojo-token") || "";
+      if (token) {
+        sessionStorage.setItem("dojo-token", token);
+        history.replaceState(null, "", location.pathname);
+      }
+      let data = null,
+        selectedCase = null,
+        reviewRun = null,
+        version = 0,
+        dirty = false,
+        saving = false,
+        polling = false,
+        signature = "",
+        renderKey = "",
+        diffRequest = 0;
+      const selectedRuns = { baseline: null, candidate: null },
+        selectedFiles = {},
+        previewRequests = {},
+        blobURLs = {};
+      async function api(path, body) {
+        const r = await fetch(path, {
+          headers: {
+            Authorization: "Bearer " + token,
+            ...(body ? { "Content-Type": "application/json" } : {}),
+          },
+          ...(body ? { method: "POST", body: JSON.stringify(body) } : {}),
+        });
+        if (!r.ok) {
+          const e = await r.json();
+          throw Error(e.error || "Request failed");
+        }
+        return r;
+      }
+      function error(message) {
+        $("error").textContent = message;
+        $("error").hidden = !message;
+      }
+      function statusTag(value) {
+        return el("span", value, "status " + value);
+      }
+      function options(select, items, chosen) {
+        const next = items.map((x) => [x.id, x.title || x.id]);
+        if (select.dataset.items !== JSON.stringify(next)) {
+          select.replaceChildren(
+            ...next.map(([id, title]) => {
+              const o = el("option", title);
+              o.value = id;
+              return o;
+            }),
+          );
+          select.dataset.items = JSON.stringify(next);
+        }
+        select.value = items.some((x) => x.id === chosen) ? chosen : items.at(-1)?.id || "";
+        return select.value;
+      }
+      const time = (value) =>
+        new Date(value).toLocaleTimeString([], {
+          hour: "2-digit",
+          minute: "2-digit",
+          second: "2-digit",
+        });
+      function draftKey(id) {
+        return "dojo-draft:" + data.session.created_at + ":" + id;
+      }
+      function feedback(id) {
+        return data?.feedback.find((f) => f.run_id === id);
+      }
+      function persistDraft() {
+        if (!reviewRun) return;
+        dirty = true;
+        sessionStorage.setItem(
+          draftKey(reviewRun),
+          JSON.stringify({ comment: $("comment").value, decision: $("decision").value, version }),
+        );
+        $("feedback-status").textContent = "Draft saved in this tab";
+      }
+      function loadReview(id, useDraft = true) {
+        reviewRun = id || null;
+        const saved = feedback(id);
+        let draft = null;
+        if (useDraft && id) {
+          try {
+            draft = JSON.parse(sessionStorage.getItem(draftKey(id)));
+          } catch {}
+        }
+        version = draft?.version ?? saved?.version ?? 0;
+        dirty = !!draft;
+        $("comment").value = draft?.comment ?? saved?.comment ?? "";
+        $("decision").value = draft?.decision ?? saved?.decision ?? "comment";
+        $("comment").disabled = $("decision").disabled = $("save").disabled = !id;
+        $("review-run").disabled = !id;
+        $("reload-feedback").hidden = true;
+        $("saved-feedback").hidden = true;
+        $("feedback-status").textContent = id
+          ? draft
+            ? "Restored your draft"
+            : saved
+              ? "Saved at " + time(saved.at)
+              : "No feedback saved yet"
+          : "Waiting for a finished run";
+        checkFeedbackConflict();
+      }
+      function checkFeedbackConflict() {
+        const saved = feedback(reviewRun);
+        if (saved && saved.version !== version) {
+          $("reload-feedback").hidden = false;
+          $("saved-feedback").hidden = false;
+          $("saved-feedback").textContent =
+            "Saved in another tab: " + saved.decision + "\n" + saved.comment;
+          $("feedback-status").textContent = "Saved feedback changed. Your draft is preserved.";
+        }
+      }
+      function selectCase(id) {
+        selectedCase = id;
+        renderKey = "";
+        render();
+      }
+      function render() {
+        $("title").textContent = data.session.title;
+        $("intent").textContent = data.session.intent;
+        $("lane").textContent =
+          data.session.lane === "fast"
+            ? "Fast Lane · fresh-context evidence"
+            : "Audit Lane · inspect its evidence record";
+        const current = data.activity.at(-1);
+        if (current) {
+          $("activity-message").textContent = current.message;
+          $("activity-reason").textContent = current.reason;
+          $("activity-time").textContent = "Last recorded: " + new Date(current.at).toLocaleString();
+          $("phase-status").textContent = current.status;
+          $("phase-status").className =
+            "status " +
+            { working: "running", waiting: "unproven", blocked: "invalid", complete: "passed" }[
+              current.status
+            ];
+        }
+        $("phases").replaceChildren(
+          ...["scope", "baseline", "author", "evaluate", "review", "revise", "done"].map((p) => {
+            const n = el("li", p[0].toUpperCase() + p.slice(1));
+            if (current?.phase === p) n.setAttribute("aria-current", "step");
+            return n;
+          }),
+        );
+        if (!data.cases.some((c) => c.id === selectedCase)) selectedCase = data.cases[0]?.id;
+        const caseKey =
+          JSON.stringify(
+            data.cases.map((c) => [
+              c.id,
+              c.title,
+              data.runs.filter((r) => r.case_id === c.id).map((r) => r.status),
+            ]),
+          ) + selectedCase;
+        if ($("cases").dataset.key !== caseKey) {
+          $("cases").replaceChildren(
+            ...data.cases.map((c) => {
+              const b = el("button");
+              b.append(el("span", c.title, "case-title"));
+              const runs = data.runs.filter((r) => r.case_id === c.id);
+              b.append(
+                el(
+                  "span",
+                  runs.length
+                    ? runs.map((r) => r.variant + ": " + r.status).join(" · ")
+                    : "Ready for its baseline",
+                  "case-meta",
+                ),
+              );
+              b.setAttribute("aria-current", String(c.id === selectedCase));
+              b.onclick = () => selectCase(c.id);
+              return b;
+            }),
+          );
+          $("cases").dataset.key = caseKey;
+          if (!data.cases.length) $("cases").append(el("p", "Waiting for examples…", "muted"));
+        }
+        const c = data.cases.find((c) => c.id === selectedCase);
+        $("case-title").textContent = c?.title || "Your first example will appear here";
+        $("prompt-details").hidden = !c;
+        $("prompt").textContent = c
+          ? c.prompt + "\n\nDeclared checks:\n" + c.criteria.map((x) => "• " + x).join("\n")
+          : "";
+        const key =
+          JSON.stringify(data.runs.filter((r) => r.case_id === selectedCase)) + selectedCase;
+        if (key !== renderKey) {
+          renderKey = key;
+          renderRun("baseline");
+          renderRun("candidate");
+        }
+        const finished = data.runs.filter(
+          (r) => r.case_id === selectedCase && r.status !== "running",
+        );
+        const previous = reviewRun;
+        const id = options(
+          $("review-run"),
+          finished.map((r) => ({ id: r.id, title: r.variant + " · " + r.id })),
+          reviewRun,
+        );
+        if (id !== previous) loadReview(id);
+        else if (!dirty && !saving) {
+          const saved = feedback(id);
+          if ((saved?.version || 0) !== version) loadReview(id, false);
+        }
+        checkFeedbackConflict();
+        $("history").replaceChildren(
+          ...data.activity
+            .slice()
+            .reverse()
+            .map((a) => {
+              const n = el("li");
+              const t = el("time", time(a.at) + " · " + a.phase + " · " + a.status);
+              t.dateTime = a.at;
+              n.append(t, el("h3", a.message), el("p", a.reason, "muted"));
+              return n;
+            }),
+        );
+        const revisions = data.revisions
+          .slice()
+          .sort((a, b) => a.created_at.localeCompare(b.created_at));
+        const oldKey = $("after").dataset.items;
+        options($("before"), revisions, $("before").value || revisions[0]?.id);
+        options($("after"), revisions, $("after").value);
+        if (oldKey !== $("after").dataset.items) renderDiffFiles();
+      }
+      function renderRun(variant) {
+        const panel = $(variant);
+        panel.replaceChildren();
+        const runs = data.runs
+          .filter((r) => r.case_id === selectedCase && r.variant === variant)
+          .sort((a, b) => a.started_at.localeCompare(b.started_at));
+        const head = el("div", undefined, "run-head");
+        head.append(
+          el("p", variant === "baseline" ? "01 / Baseline" : "02 / With the skill", "eyebrow"),
+        );
+        panel.append(head);
+        if (!runs.length) {
+          head.append(
+            el(
+              "p",
+              variant === "baseline"
+                ? "The starting point will appear here."
+                : "The candidate’s output will appear here.",
+              "empty",
+            ),
+          );
+          return;
+        }
+        const select = el("select");
+        select.setAttribute("aria-label", variant + " run");
+        selectedRuns[variant] = options(
+          select,
+          runs.map((r) => ({
+            id: r.id,
+            title: r.id + (r.revision ? " · " + r.revision : " · no skill"),
+          })),
+          selectedRuns[variant],
+        );
+        select.onchange = () => {
+          selectedRuns[variant] = select.value;
+          renderRun(variant);
+        };
+        head.append(select);
+        const r = runs.find((r) => r.id === select.value);
+        head.append(
+          statusTag(r.status),
+          el(
+            "span",
+            (r.tokens === null ? "Tokens not recorded" : r.tokens.toLocaleString() + " tokens") +
+              " · " +
+              (r.duration_seconds === null
+                ? "Time not recorded"
+                : r.duration_seconds.toFixed(1) + "s"),
+            "metrics",
+          ),
+          el("p", r.summary || "The agent is working on this case."),
+        );
+        const body = el("div", undefined, "run-body");
+        panel.append(body);
+        const checks = el("ul", undefined, "checks");
+        for (const c of r.checks) {
+          const li = el("li");
+          li.append(el("strong", c.status + " · " + c.criterion), el("p", c.evidence));
+          checks.append(li);
+        }
+        body.append(checks);
+        if (!r.files.length) {
+          body.append(el("p", "No output artifacts recorded.", "muted"));
+          return;
+        }
+        body.append(el("p", "Output artifacts", "eyebrow"));
+        const files = el("div", undefined, "files"),
+          preview = el("div", undefined, "preview"),
+          actions = el("div", undefined, "artifact-actions");
+        preview.setAttribute("aria-label", variant + " artifact preview");
+        const buttons = [];
+        for (const f of r.files) {
+          const b = el("button", f.path);
+          b.onclick = () => {
+            selectedFiles[r.id] = f.path;
+            buttons.forEach((n) => n.setAttribute("aria-pressed", String(n === b)));
+            showArtifact(variant, r, f, preview, actions);
+          };
+          buttons.push(b);
+          files.append(b);
+        }
+        body.append(files, preview, actions);
+        const chosen = r.files.find((f) => f.path === selectedFiles[r.id]) || r.files[0];
+        buttons[r.files.indexOf(chosen)].click();
+      }
+      async function showArtifact(slot, run, file, preview, actions) {
+        const request = (previewRequests[slot] || 0) + 1;
+        previewRequests[slot] = request;
+        preview.textContent = "Loading artifact…";
+        actions.replaceChildren();
+        if (blobURLs[slot]) URL.revokeObjectURL(blobURLs[slot]);
+        try {
+          const r = await api(
+            "/api/artifact?" +
+              new URLSearchParams({ kind: "runs", owner: run.id, path: file.path }),
+          );
+          const blob = await r.blob();
+          if (previewRequests[slot] !== request || !preview.isConnected) return;
+          const url = URL.createObjectURL(blob);
+          blobURLs[slot] = url;
+          const link = el("a", "Download " + file.path);
+          link.href = url;
+          link.download = file.path.split("/").at(-1);
+          actions.append(link);
+          preview.replaceChildren();
+          if (blob.type.startsWith("image/")) {
+            const img = el("img");
+            img.alt = file.path;
+            img.src = url;
+            preview.append(img);
+          } else if (blob.size > 256 * 1024) {
+            preview.textContent =
+              "This file is too large for an inline text preview. Download it to inspect.";
+          } else if (/\.html?$/i.test(file.path)) {
+            const text = await blob.text();
+            if (previewRequests[slot] !== request) return;
+            URL.revokeObjectURL(url);
+            const safe =
+              "<meta http-equiv=\"Content-Security-Policy\" content=\"default-src 'none'; style-src 'unsafe-inline'; img-src data:; base-uri 'none'; form-action 'none'\">" +
+              text;
+            const frame = el("iframe");
+            frame.title = file.path + " (scripts and network disabled)";
+            frame.setAttribute("sandbox", "");
+            frame.srcdoc = safe;
+            preview.append(frame);
+            const download = URL.createObjectURL(blob);
+            blobURLs[slot] = download;
+            link.href = download;
+            actions.append(el("span", "Preview: scripts and network disabled."));
+          } else if (
+            blob.type.startsWith("text/") ||
+            /\.(md|jsonl?|ya?ml|csv|py|js|ts|toml|log|txt)$/i.test(file.path)
+          ) {
+            const text = await blob.text();
+            if (previewRequests[slot] === request) preview.append(el("pre", text));
+          } else
+            preview.textContent = "Download this artifact to inspect it in its native application.";
+        } catch (e) {
+          if (previewRequests[slot] === request) preview.textContent = e.message;
+        }
+      }
+      function renderDiffFiles() {
+        const revisions = data.revisions.filter(
+          (r) => r.id === $("before").value || r.id === $("after").value,
+        );
+        const paths = [...new Set(revisions.flatMap((r) => r.files.map((f) => f.path)))].sort();
+        options(
+          $("diff-file"),
+          paths.map((p) => ({ id: p })),
+          $("diff-file").value || "SKILL.md",
+        );
+        showDiff();
+      }
+      async function showDiff() {
+        const request = ++diffRequest;
+        const after = data.revisions.find((r) => r.id === $("after").value);
+        $("revision-reason").textContent = after ? after.id + ": " + after.reason : "";
+        if (!$("before").value || !after || !$("diff-file").value) return;
+        $("diff").textContent = "Loading comparison…";
+        try {
+          const r = await api(
+            "/api/diff?" +
+              new URLSearchParams({
+                before: $("before").value,
+                after: after.id,
+                path: $("diff-file").value,
+              }),
+          );
+          const result = await r.json();
+          if (request !== diffRequest) return;
+          $("diff").replaceChildren(
+            ...(result.diff || "No changes between these snapshots.")
+              .split("\n")
+              .map((line) =>
+                el(
+                  "span",
+                  line,
+                  line.startsWith("+") ? "added" : line.startsWith("-") ? "removed" : "",
+                ),
+              ),
+          );
+        } catch (e) {
+          if (request === diffRequest) $("diff").textContent = e.message;
+        }
+      }
+      $("before").onchange = $("after").onchange = renderDiffFiles;
+      $("diff-file").onchange = showDiff;
+      $("comment").oninput = $("decision").onchange = persistDraft;
+      $("review-run").onchange = () => loadReview($("review-run").value);
+      $("reload-feedback").onclick = () => {
+        sessionStorage.removeItem(draftKey(reviewRun));
+        loadReview(reviewRun, false);
+      };
+      $("review-form").onsubmit = async (event) => {
+        event.preventDefault();
+        if (!reviewRun || saving) return;
+        const id = reviewRun;
+        const submitted = {
+          run_id: id,
+          comment: $("comment").value,
+          decision: $("decision").value,
+          version,
+        };
+        saving = true;
+        $("save").disabled = true;
+        $("feedback-status").textContent = "Saving…";
+        try {
+          const saved = await (await api("/api/feedback", submitted)).json();
+          data.feedback = data.feedback.filter((f) => f.run_id !== id).concat(saved);
+          signature = "";
+          const draft = JSON.parse(sessionStorage.getItem(draftKey(id)));
+          if (
+            draft &&
+            (draft.comment !== submitted.comment || draft.decision !== submitted.decision)
+          ) {
+            sessionStorage.setItem(
+              draftKey(id),
+              JSON.stringify({ ...draft, version: saved.version }),
+            );
+          } else sessionStorage.removeItem(draftKey(id));
+          if (reviewRun === id) {
+            version = saved.version;
+            if (
+              $("comment").value === submitted.comment &&
+              $("decision").value === submitted.decision
+            ) {
+              dirty = false;
+              $("feedback-status").textContent = "Saved at " + time(saved.at);
+            } else persistDraft();
+          }
+        } catch (e) {
+          if (reviewRun === id) $("feedback-status").textContent = e.message;
+          await poll();
+        } finally {
+          saving = false;
+          $("save").disabled = !reviewRun;
+        }
+      };
+      document.querySelectorAll("[data-tab]").forEach(
+        (b) =>
+          (b.onclick = () => {
+            document.querySelectorAll("[data-tab]").forEach((n) => {
+              n.setAttribute("aria-pressed", String(n === b));
+              $(n.dataset.tab + "-panel").hidden = n !== b;
+            });
+          }),
+      );
+      async function poll() {
+        if (polling) return;
+        polling = true;
+        try {
+          const next = await (await api("/api/state")).json();
+          const key = JSON.stringify(next);
+          data = next;
+          if (signature !== key) {
+            signature = key;
+            render();
+          }
+          $("connection").classList.remove("offline");
+          $("connection-text").textContent = "Connected · local session";
+          error("");
+        } catch (e) {
+          $("connection").classList.add("offline");
+          $("connection-text").textContent = "Disconnected";
+          error(e.message + " Your current view and drafts are preserved.");
+        } finally {
+          polling = false;
+        }
+      }
+      loadReview(null);
+      poll();
+      setInterval(poll, 1500);
+    </script>
+  </body>
+</html>
